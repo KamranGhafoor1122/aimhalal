@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "771807649146",
+    "firebase_url": "https://aimhalal-app-default-rtdb.firebaseio.com",
+    "project_id": "aimhalal-app",
+    "storage_bucket": "aimhalal-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771807649146:android:b1bf2958e834a6c95f0ac3",
+        "android_client_info": {
+          "package_name": "com.aimhalal.aimhalalUser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771807649146-bup3g63nqb5rnp37vjf7mlmh37l81kf8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aimhalal.aimhalalUser",
+            "certificate_hash": "6e4c088cd9a3f5ea8966ff4b1427aabdb61c5a32"
+          }
+        },
+        {
+          "client_id": "771807649146-tsuuic6pf44opdsho9q5t98oqnt1u45n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC223O205HrwFFNSFiSoow1XZd6KHLAV60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771807649146-tsuuic6pf44opdsho9q5t98oqnt1u45n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
