@@ -30,10 +30,12 @@ class _NotificationsWidgetState extends StateMVC<NotificationsWidget> {
       key: _con.scaffoldKey,
       appBar: AppBar(
         leading: new IconButton(
-          icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
-          onPressed: () => widget.parentScaffoldKey.currentState.openDrawer(),
+          icon: 
+          
+          new Icon(Icons.arrow_back_ios, color: Theme.of(context).hintColor),
+          onPressed: () => Navigator.pop(context),
         ),
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,

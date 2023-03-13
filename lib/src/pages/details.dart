@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../generated/l10n.dart';
 import '../controllers/market_controller.dart';
@@ -74,7 +75,8 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
           });
           break;
         case 1:
-          if (currentUser.value.apiToken == null) {
+          launch("tel:${_con.market.mobile}");
+         /* if (currentUser.value.apiToken == null) {
             widget.currentPage = PermissionDeniedWidget();
           } else {
             Conversation _conversation = new Conversation(
@@ -84,7 +86,7 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
                 })?.toList(),
                 name: _con.market.name);
             widget.currentPage = ChatWidget(parentScaffoldKey: widget.scaffoldKey, routeArgument: RouteArgument(id: _con.market.id, param: _conversation));
-          }
+          }*/
           break;
         case 2:
           widget.currentPage = MapWidget(parentScaffoldKey: widget.scaffoldKey, routeArgument: RouteArgument(param: _con.market));
@@ -122,7 +124,7 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
               ),
               IconButton(
                 icon: Icon(
-                  Icons.chat_outlined,
+                  Icons.call_outlined,
                   size: widget.currentTab == 1 ? 28 : 24,
                   color: widget.currentTab == 1 ? Theme.of(context).accentColor : Theme.of(context).focusColor,
                 ),

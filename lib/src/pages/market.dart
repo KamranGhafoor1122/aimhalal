@@ -179,7 +179,7 @@ class _MarketWidgetState extends StateMVC<MarketWidget> {
                                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                                 child: Helper.applyHtml(context, _con.market.information),
                               ),
-                              Container(
+                             /* Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                                 margin: const EdgeInsets.symmetric(vertical: 5),
                                 color: Theme.of(context).primaryColor,
@@ -225,7 +225,7 @@ class _MarketWidgetState extends StateMVC<MarketWidget> {
                                     ),
                                   ],
                                 ),
-                              ),
+                              ),*/
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                                 margin: const EdgeInsets.symmetric(vertical: 5),

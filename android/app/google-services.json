@@ -1,43 +1,117 @@
 {
   "project_info": {
-    "project_number": "771807649146",
-    "firebase_url": "https://aimhalal-app-default-rtdb.firebaseio.com",
-    "project_id": "aimhalal-app",
-    "storage_bucket": "aimhalal-app.appspot.com"
+    "project_number": "782903466348",
+    "project_id": "aimhalal-3cee4",
+    "storage_bucket": "aimhalal-3cee4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:771807649146:android:b1bf2958e834a6c95f0ac3",
+        "mobilesdk_app_id": "1:782903466348:android:7bb0afb0ad3f2b4939bb49",
         "android_client_info": {
-          "package_name": "com.aimhalal.aimhalalUser"
+          "package_name": "com.aimhalal.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "771807649146-bup3g63nqb5rnp37vjf7mlmh37l81kf8.apps.googleusercontent.com",
+          "client_id": "782903466348-7djqsr8q4cnej0mjtnjvdbv6m4u2tjqb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.aimhalal.aimhalalUser",
-            "certificate_hash": "6e4c088cd9a3f5ea8966ff4b1427aabdb61c5a32"
+            "package_name": "com.aimhalal.app",
+            "certificate_hash": "d59001769c8c1209b998aab173a8ea92c903014a"
           }
         },
         {
-          "client_id": "771807649146-tsuuic6pf44opdsho9q5t98oqnt1u45n.apps.googleusercontent.com",
+          "client_id": "782903466348-jbcfaod5icjsn2m4vugq30a88nt3rjvm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aimhalal.app",
+            "certificate_hash": "41c05071fd560bc81111f02d17a59e44db92c6b4"
+          }
+        },
+        {
+          "client_id": "782903466348-k0rg5o4d86eob0lqb4ktbjc3m2a98r0s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aimhalal.app",
+            "certificate_hash": "8cd12e6d63ac19e43c65969f9b17406dc0c08f9a"
+          }
+        },
+        {
+          "client_id": "782903466348-ms8ljklnfmiekuiu198ligoa6qsr6rfp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aimhalal.app",
+            "certificate_hash": "b024b54404aa83b8b1c6065543c6864242ef66bd"
+          }
+        },
+        {
+          "client_id": "782903466348-vrcl0piuhreu6e00mr9s36j03mla1rin.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aimhalal.app",
+            "certificate_hash": "9548282bea39e0a9d9124cb0dc113a29abf32974"
+          }
+        },
+        {
+          "client_id": "782903466348-6dl0vnk96tbm06otc6bmmv0r9k3os9ij.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC223O205HrwFFNSFiSoow1XZd6KHLAV60"
+          "current_key": "AIzaSyBnFScjrSNW0jXdqzHIwdkBVJGeGq9K7IE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "771807649146-tsuuic6pf44opdsho9q5t98oqnt1u45n.apps.googleusercontent.com",
+              "client_id": "782903466348-6dl0vnk96tbm06otc6bmmv0r9k3os9ij.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "782903466348-ca3bklfa13muk1mdnnrhfamubnqil454.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ezeeperks.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782903466348:android:6ef3224c6d044e2f39bb49",
+        "android_client_info": {
+          "package_name": "com.ezeeperks.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782903466348-6dl0vnk96tbm06otc6bmmv0r9k3os9ij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnFScjrSNW0jXdqzHIwdkBVJGeGq9K7IE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782903466348-6dl0vnk96tbm06otc6bmmv0r9k3os9ij.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "782903466348-ca3bklfa13muk1mdnnrhfamubnqil454.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ezeeperks.app"
+              }
             }
           ]
         }

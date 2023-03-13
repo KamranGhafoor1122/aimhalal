@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
+import 'package:location/location.dart' as Loc;
 import 'package:markets/src/repository/settings_repository.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../generated/l10n.dart';
@@ -34,7 +35,7 @@ class HomeWidget extends StatefulWidget {
 
 class _HomeWidgetState extends StateMVC<HomeWidget> {
   HomeController _con;
-  String adress;
+  String address;
 
   _HomeWidgetState() : super(HomeController()) {
     _con = controller;
@@ -60,8 +61,12 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
         elevation: 0,
         centerTitle: false,
         title: Text(
-          adress??S.of(context).home,
-          style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),
+          address??S.of(context).home,
+          style: Theme.of(context).textTheme.bodyText1.merge(TextStyle(letterSpacing: 1.3)).copyWith(
+            color: Theme.of(context).accentColor,
+            fontSize: 12,
+            fontWeight: FontWeight.w600
+          ),
         ),
 
        /* ValueListenableBuilder(
@@ -290,17 +295,27 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
     );
   }
   Future<dynamic> showCurrentLocation() async {
-    var location = new Location();
+    Loc.Location location =  Loc.Location();
     MapsUtil mapsUtil = new MapsUtil();
     final whenDone = new Completer();
     Address _address = new Address();
     location.requestService().then((value) async {
       location.getLocation().then((_locationData) async {
-        String _addressName = await mapsUtil.getAddressName(new LatLng(_locationData?.latitude, _locationData?.longitude), setting.value.googleMapsKey);
-        _address = Address.fromJSON({'address': _addressName, 'latitude': _locationData?.latitude, 'longitude': _locationData?.longitude});
-         adress = _addressName;
-print("add: $adress");
-         setState(() { });
+          List<Placemark> newPlace = await placemarkFromCoordinates(_locationData?.latitude, _locationData?.longitude);
+
+          // this is all you need
+          Placemark placeMark  = newPlace[0];
+          String name = placeMark.name;
+          String subLocality = placeMark.subLocality;
+          String locality = placeMark.locality;
+          String administrativeArea = placeMark.administrativeArea;
+          String postalCode = placeMark.postalCode;
+          String country = placeMark.country;
+           address = "${subLocality}, ${locality}, $country";
+
+          print("address $address");
+          setState(() { });
+
         whenDone.complete(_address);
       }).timeout(Duration(seconds: 10), onTimeout: () async {
         whenDone.complete(_address);
