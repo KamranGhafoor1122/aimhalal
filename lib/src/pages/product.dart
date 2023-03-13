@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:markets/src/controllers/market_controller.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../generated/l10n.dart';
 import '../controllers/product_controller.dart';
@@ -12,6 +14,7 @@ import '../elements/OptionItemWidget.dart';
 import '../elements/ReviewsListWidget.dart';
 import '../elements/ShoppingCartFloatButtonWidget.dart';
 import '../helpers/helper.dart';
+import '../models/market.dart';
 import '../models/media.dart';
 import '../models/route_argument.dart';
 import '../repository/user_repository.dart';
@@ -30,6 +33,8 @@ class ProductWidget extends StatefulWidget {
 
 class _ProductWidgetState extends StateMVC<ProductWidget> {
   ProductController _con;
+  MarketController marketController = MarketController();
+
 
   _ProductWidgetState() : super(ProductController()) {
     _con = controller;
@@ -38,6 +43,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
   @override
   void initState() {
     _con.listenForProduct(productId: widget.routeArgument.id);
+     print("pp : ${(widget.routeArgument.param as Market).mobile}");
     _con.listenForCart();
     _con.listenForFavorite(productId: widget.routeArgument.id);
     super.initState();
@@ -296,7 +302,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                       ],
                     ),
                   ),
-                  Positioned(
+                /*  Positioned(
                     top: 32,
                     right: 20,
                     child: _con.loadCart
@@ -310,11 +316,11 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                             labelColor: Theme.of(context).hintColor,
                             routeArgument: RouteArgument(param: '/Product', id: _con.product.id),
                           ),
-                  ),
+                  ),*/
                   Positioned(
                     bottom: 0,
                     child: Container(
-                      height: 150,
+                      height: 100,
                       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                       decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
@@ -326,7 +332,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.max,
                           children: <Widget>[
-                            Row(
+                            /*Row(
                               children: <Widget>[
                                 Expanded(
                                   child: Text(
@@ -360,7 +366,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 10),
+                            SizedBox(height: 10),*/
                             Row(
                               children: <Widget>[
                                 Expanded(
@@ -394,8 +400,23 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                             color: Theme.of(context).primaryColor,
                                           )),
                                 ),
-                                SizedBox(width: 10),
-                                Stack(
+                                SizedBox(width: 100),
+
+                                Expanded(
+                                  child: MaterialButton(
+                                      elevation: 0,
+                                      onPressed: () {
+                                        launch("tel:${(widget.routeArgument.param as Market).mobile}");
+                                      },
+                                      padding: EdgeInsets.symmetric(vertical: 14),
+                                      color: Theme.of(context).accentColor,
+                                      shape: StadiumBorder(),
+                                      child: Icon(
+                                        Icons.phone,
+                                        color: Theme.of(context).primaryColor,
+                                      )),
+                                ),
+                               /* Stack(
                                   fit: StackFit.loose,
                                   alignment: AlignmentDirectional.centerEnd,
                                   children: <Widget>[
@@ -448,7 +469,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                       ),
                                     )
                                   ],
-                                ),
+                                ),*/
                               ],
                             ),
                             SizedBox(height: 10),

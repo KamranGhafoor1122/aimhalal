@@ -73,7 +73,8 @@ class _CategoryWidgetState extends StateMVC<CategoryWidget> {
                     ),
                   ),
                 )
-              : ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
+              : Container()
+         /* ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),*/
         ],
       ),
       body: RefreshIndicator(

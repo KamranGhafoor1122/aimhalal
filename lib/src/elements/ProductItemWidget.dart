@@ -2,14 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../helpers/helper.dart';
+import '../models/market.dart';
 import '../models/product.dart';
 import '../models/route_argument.dart';
 
 class ProductItemWidget extends StatelessWidget {
   final String heroTag;
   final Product product;
+  final Market market;
 
-  const ProductItemWidget({Key key, this.product, this.heroTag}) : super(key: key);
+  const ProductItemWidget({Key key, this.product, this.heroTag,this.market}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class ProductItemWidget extends StatelessWidget {
       focusColor: Theme.of(context).accentColor,
       highlightColor: Theme.of(context).primaryColor,
       onTap: () {
-        Navigator.of(context).pushNamed('/Product', arguments: RouteArgument(id: product.id, heroTag: this.heroTag));
+        Navigator.of(context).pushNamed('/Product', arguments: RouteArgument(id: product.id, heroTag: this.heroTag,param: market));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),

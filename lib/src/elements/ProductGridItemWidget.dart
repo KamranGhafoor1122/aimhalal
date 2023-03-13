@@ -54,7 +54,7 @@ class _ProductGridItemWidgetState extends State<ProductGridItemWidget> {
               )
             ],
           ),
-          Container(
+          /*Container(
             margin: EdgeInsets.all(10),
             width: 40,
             height: 40,
@@ -72,7 +72,7 @@ class _ProductGridItemWidgetState extends State<ProductGridItemWidget> {
               color: Theme.of(context).accentColor.withOpacity(0.9),
               shape: StadiumBorder(),
             ),
-          ),
+          ),*/
         ],
       ),
     );

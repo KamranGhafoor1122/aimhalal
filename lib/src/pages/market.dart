@@ -330,6 +330,7 @@ class _MarketWidgetState extends StateMVC<MarketWidget> {
                                       itemBuilder: (context, index) {
                                         return ProductItemWidget(
                                           heroTag: 'details_featured_product',
+                                          market: _con.market,
                                           product: _con.featuredProducts.elementAt(index),
                                         );
                                       },

@@ -138,7 +138,7 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
           ),
           ListTile(
             onTap: () {
-              Navigator.of(context).pushNamed('/Pages', arguments: 2);
+              Navigator.of(navigatorKey.currentContext).pushNamed('/Pages', arguments: 0);
             },
             leading: Icon(
               Icons.home_outlined,
@@ -188,7 +188,28 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
               style: Theme.of(context).textTheme.subtitle1,
             ),
           ),
+
           ListTile(
+            onTap: () {
+              if (currentUser.value.apiToken != null) {
+                logout().then((value) {
+                  Navigator.of(context).pushNamedAndRemoveUntil('/Pages', (Route<dynamic> route) => false, arguments: 2);
+                });
+              } else {
+                Navigator.of(context).pushNamed('/Login');
+              }
+            },
+            leading: Icon(
+              Icons.exit_to_app_outlined,
+              color: Theme.of(context).focusColor.withOpacity(1),
+            ),
+            title: Text(
+              currentUser.value.apiToken != null ? S.of(context).log_out : S.of(context).login,
+              style: Theme.of(context).textTheme.subtitle1,
+            ),
+          ),
+
+          /*ListTile(
             onTap: () {
               Navigator.of(context).pushNamed('/Pages', arguments: 4);
             },
@@ -200,7 +221,7 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
               S.of(context).messages,
               style: Theme.of(context).textTheme.subtitle1,
             ),
-          ),
+          ),*/
           ListTile(
             dense: true,
             title: Text(
@@ -272,25 +293,6 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
             ),
             title: Text(
               Theme.of(context).brightness == Brightness.dark ? S.of(context).light_mode : S.of(context).dark_mode,
-              style: Theme.of(context).textTheme.subtitle1,
-            ),
-          ),
-          ListTile(
-            onTap: () {
-              if (currentUser.value.apiToken != null) {
-                logout().then((value) {
-                  Navigator.of(context).pushNamedAndRemoveUntil('/Pages', (Route<dynamic> route) => false, arguments: 2);
-                });
-              } else {
-                Navigator.of(context).pushNamed('/Login');
-              }
-            },
-            leading: Icon(
-              Icons.exit_to_app_outlined,
-              color: Theme.of(context).focusColor.withOpacity(1),
-            ),
-            title: Text(
-              currentUser.value.apiToken != null ? S.of(context).log_out : S.of(context).login,
               style: Theme.of(context).textTheme.subtitle1,
             ),
           ),

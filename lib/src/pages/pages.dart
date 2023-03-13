@@ -11,6 +11,7 @@ import '../pages/map.dart';
 import '../pages/notifications.dart';
 import '../pages/orders.dart';
 import 'package:flutter_svg/svg.dart';
+import '../repository/settings_repository.dart';
 import 'messages.dart';
 import 'profile.dart';
 
@@ -74,7 +75,7 @@ class _PagesWidgetState extends State<PagesWidget> {
           break;
 
         case 2:
-          Navigator.of(context).push(SearchModal());
+          Navigator.of(navigatorKey.currentContext).push(SearchModal());
           break;
 
         case 3:

@@ -102,19 +102,12 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
               String _homeSection = settingsRepo.setting.value.homeSections.elementAt(index);
               switch (_homeSection) {
                 case 'slider':
-                  return HomeSliderWidget(slides: _con.slides);
+                  return HomeSliderWidget(slides: _con.slides,parentScaffoldKey: widget.parentScaffoldKey,);
                 case 'search':
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: SearchBarWidget(
-                      onClickFilter: (event) {
-                        widget.parentScaffoldKey.currentState.openEndDrawer();
-                      },
-                    ),
-                  );
+                  return Container();
                 case 'top_markets_heading':
                   return Padding(
-                    padding: const EdgeInsets.only(top: 15, left: 20, right: 20, bottom: 10),
+                    padding: const EdgeInsets.only(top: 30, left: 20, right: 20, bottom: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -187,14 +180,14 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                             ),
                           ],
                         ),
-                        if (settingsRepo.deliveryAddress.value?.address != null)
+                        /*if (settingsRepo.deliveryAddress.value?.address != null)
                           Padding(
                             padding: const EdgeInsets.only(top: 12),
                             child: Text(
                               S.of(context).near_to + " " + (settingsRepo.deliveryAddress.value?.address),
                               style: Theme.of(context).textTheme.caption,
                             ),
-                          ),
+                          ),*/
                       ],
                     ),
                   );

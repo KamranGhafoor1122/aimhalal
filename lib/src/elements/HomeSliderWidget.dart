@@ -155,6 +155,21 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
               ),
 
 
+              Positioned(
+                bottom: -15,
+                left: 15,
+                right: 15,
+                child: SizedBox(
+                  height: 60,
+                  width: MediaQuery.of(context).size.width,
+                  child: HomeSearchBarWidget(
+                    onClickFilter: (event) {
+                      widget.parentScaffoldKey.currentState.openEndDrawer();
+                    },
+                  ),
+                ),
+              )
+
             ],
           );
   }

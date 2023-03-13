@@ -7,6 +7,8 @@ import '../elements/CardWidget.dart';
 import '../elements/CircularLoadingWidget.dart';
 import '../elements/ProductItemWidget.dart';
 import '../models/route_argument.dart';
+import '../repository/settings_repository.dart';
+
 
 class SearchResultWidget extends StatefulWidget {
   final String heroTag;
@@ -45,7 +47,7 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                 icon: Icon(Icons.close),
                 color: Theme.of(context).hintColor,
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.pop(navigatorKey.currentContext);
                 },
               ),
               title: Text(
