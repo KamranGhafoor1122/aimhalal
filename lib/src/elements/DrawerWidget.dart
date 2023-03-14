@@ -193,7 +193,7 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
             onTap: () {
               if (currentUser.value.apiToken != null) {
                 logout().then((value) {
-                  Navigator.of(context).pushNamedAndRemoveUntil('/Pages', (Route<dynamic> route) => false, arguments: 2);
+                  Navigator.of(context).pushNamedAndRemoveUntil('/Pages', (Route<dynamic> route) => false, arguments: 0);
                 });
               } else {
                 Navigator.of(context).pushNamed('/Login');

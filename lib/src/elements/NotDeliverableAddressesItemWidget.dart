@@ -10,7 +10,7 @@ class NotDeliverableAddressesItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
+        Navigator.of(context).pushReplacementNamed('/Pages', arguments: 0);
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
