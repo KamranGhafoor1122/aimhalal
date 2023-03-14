@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:markets/src/pages/notifications.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -24,7 +25,8 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
             onTap: () {
               currentUser.value.apiToken != null ? Navigator.of(context).pushNamed('/Profile') : Navigator.of(context).pushNamed('/Login');
             },
-            child: currentUser.value.apiToken != null
+            child:
+            currentUser.value.apiToken != null
                 ? UserAccountsDrawerHeader(
                     decoration: BoxDecoration(
                       color: Theme.of(context).hintColor.withOpacity(0.1),
@@ -151,7 +153,9 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
           ),
           ListTile(
             onTap: () {
-              Navigator.of(context).pushNamed('/Pages', arguments: 0);
+               Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>NotificationsWidget()));
+              //  Navigator.of(context).pushNamed('/Pages', arguments: 0);
             },
             leading: Icon(
               Icons.notifications_none_outlined,

@@ -10,6 +10,8 @@ import '../elements/ProfileAvatarWidget.dart';
 import '../elements/ShoppingCartButtonWidget.dart';
 import '../repository/user_repository.dart';
 
+
+
 class ProfileWidget extends StatefulWidget {
   final GlobalKey<ScaffoldState> parentScaffoldKey;
 
@@ -80,6 +82,21 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
                     ),
                     title: Text(
                       S.of(context).recent_orders,
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    leading: Icon(
+                      Icons.delete_outlined,
+                      color: Theme.of(context).hintColor,
+                    ),
+                    onTap: () async{
+                      await logout();
+                      Navigator.of(context).pushNamedAndRemoveUntil('/Pages', (Route<dynamic> route) => false, arguments: 0);
+                    },
+                    title: Text(
+                      "Delete Account",
                       style: Theme.of(context).textTheme.headline4,
                     ),
                   ),

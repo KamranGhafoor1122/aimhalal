@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:markets/src/models/home_categories.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../helpers/helper.dart';
 import '../models/category.dart';
-import '../models/market.dart';
+import '../models/market.dart' as M;
 import '../models/product.dart';
 import '../models/review.dart';
 import '../models/slide.dart';
@@ -16,14 +17,15 @@ import '../repository/slider_repository.dart';
 class HomeController extends ControllerMVC {
   List<Category> categories = <Category>[];
   List<Slide> slides = <Slide>[];
-  List<Market> topMarkets = <Market>[];
-  List<Market> popularMarkets = <Market>[];
+  List<M.Market> topMarkets = <M.Market>[];
+  List<M.Market> popularMarkets = <M.Market>[];
   List<Review> recentReviews = <Review>[];
   List<Product> trendingProducts = <Product>[];
-
+  HomeCategories homeCategories;
   HomeController() {
     listenForTopMarkets();
     listenForSlides();
+    listenForHomeCategories();
     listenForTrendingProducts();
     listenForCategories();
     listenForPopularMarkets();
@@ -49,15 +51,15 @@ class HomeController extends ControllerMVC {
   }
 
   Future<void> listenForTopMarkets() async {
-    final Stream<Market> stream = await getNearMarkets(deliveryAddress.value, deliveryAddress.value);
-    stream.listen((Market _market) {
+    final Stream<M.Market> stream = await getNearMarkets(deliveryAddress.value, deliveryAddress.value);
+    stream.listen((M.Market _market) {
       setState(() => topMarkets.add(_market));
     }, onError: (a) {}, onDone: () {});
   }
 
   Future<void> listenForPopularMarkets() async {
-    final Stream<Market> stream = await getPopularMarkets(deliveryAddress.value);
-    stream.listen((Market _market) {
+    final Stream<M.Market> stream = await getPopularMarkets(deliveryAddress.value);
+    stream.listen((M.Market _market) {
       setState(() => popularMarkets.add(_market));
     }, onError: (a) {}, onDone: () {});
   }
@@ -78,6 +80,12 @@ class HomeController extends ControllerMVC {
     }, onDone: () {});
   }
 
+  Future<void> listenForHomeCategories() async {
+   homeCategories = await getHomeCategories();
+   setState(() { });
+  }
+
+
   void requestForCurrentLocation(BuildContext context) {
     OverlayEntry loader = Helper.overlayLoader(state.context);
     Overlay.of(state.context).insert(loader);
@@ -94,8 +102,8 @@ class HomeController extends ControllerMVC {
     setState(() {
       slides = <Slide>[];
       categories = <Category>[];
-      topMarkets = <Market>[];
-      popularMarkets = <Market>[];
+      topMarkets = <M.Market>[];
+      popularMarkets = <M.Market>[];
       recentReviews = <Review>[];
       trendingProducts = <Product>[];
     });

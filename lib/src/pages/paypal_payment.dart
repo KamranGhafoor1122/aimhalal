@@ -46,7 +46,7 @@ class _PayPalPaymentWidgetState extends StateMVC<PayPalPaymentWidget> {
                   _con.url = url;
                 });
                 if (url == "${GlobalConfiguration().getValue('base_url')}payments/paypal") {
-                  Navigator.of(context).pushReplacementNamed('/Pages', arguments: 3);
+                  Navigator.of(context).pushReplacementNamed('/Pages', arguments: 0);
                 }
               },
               onPageFinished: (String url) {

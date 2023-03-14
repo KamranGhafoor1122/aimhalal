@@ -55,8 +55,9 @@ class Setting {
       payPalEnabled = jsonMap['enable_paypal'] == null || jsonMap['enable_paypal'] == '0' ? false : true;
       stripeEnabled = jsonMap['enable_stripe'] == null || jsonMap['enable_stripe'] == '0' ? false : true;
       razorPayEnabled = jsonMap['enable_razorpay'] == null || jsonMap['enable_razorpay'] == '0' ? false : true;
-      for (int _i = 1; _i <= 12; _i++) {
+      for (int _i = 1; _i <= 13; _i++) {
         homeSections.add(jsonMap['home_section_' + _i.toString()] != null ? jsonMap['home_section_' + _i.toString()] : 'empty');
+       // print("home sect: ${homeSections[_i]}");
       }
     } catch (e) {
       print(CustomTrace(StackTrace.current, message: e));

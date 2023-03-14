@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:global_configuration/global_configuration.dart';
 import 'package:http/http.dart' as http;
+import 'package:markets/src/models/home_categories.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../helpers/custom_trace.dart';
@@ -59,6 +60,28 @@ Future<Stream<Product>> getProduct(String productId) async {
     return new Stream.value(new Product.fromJSON({}));
   }
 }
+
+Future<HomeCategories> getHomeCategories() async {
+  Uri uri = Helper.getUri('api/fields');
+  // uri = uri.replace(queryParameters: {'with': 'market;category;options;optionGroups;productReviews;productReviews.user'});
+  try {
+
+    var response = await http.get(uri);
+    HomeCategories homeCategories;
+
+    print("home cat res: ${response.statusCode} -- ${response.body}");
+    if(response.statusCode == 200){
+          homeCategories = HomeCategories.fromJson(jsonDecode(response.body));
+    }
+    return homeCategories;
+
+  } catch (e) {
+    print(CustomTrace(StackTrace.current, message: e.toString()).toString());
+    return new  HomeCategories.fromJson({});
+  }
+}
+
+
 
 Future<Stream<Product>> searchProducts(String search, Address address) async {
   Uri uri = Helper.getUri('api/products');

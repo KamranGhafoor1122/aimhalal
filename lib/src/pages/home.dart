@@ -105,8 +105,16 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                   return HomeSliderWidget(slides: _con.slides,parentScaffoldKey: widget.parentScaffoldKey,);
                 case 'search':
                   return Container();
+                case 'top_markets':
+                  return CardsCarouselWidget(marketsList: _con.topMarkets, heroTag: 'home_top_markets',homeCategories: _con.homeCategories,);
                 case 'top_markets_heading':
                   return Padding(
+                    padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 10),
+                    child: Container()
+                  );
+
+
+                   /* Padding(
                     padding: const EdgeInsets.only(top: 30, left: 20, right: 20, bottom: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,7 +137,7 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                                   _con.requestForCurrentLocation(context);
                                 } else {
                                   var bottomSheetController = widget.parentScaffoldKey.currentState.showBottomSheet(
-                                    (context) => DeliveryAddressBottomSheetWidget(scaffoldKey: widget.parentScaffoldKey),
+                                        (context) => DeliveryAddressBottomSheetWidget(scaffoldKey: widget.parentScaffoldKey),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: new BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
                                     ),
@@ -151,7 +159,7 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                                   S.of(context).delivery,
                                   style: TextStyle(
                                       color:
-                                          settingsRepo.deliveryAddress.value?.address == null ? Theme.of(context).hintColor : Theme.of(context).primaryColor),
+                                      settingsRepo.deliveryAddress.value?.address == null ? Theme.of(context).hintColor : Theme.of(context).primaryColor),
                                 ),
                               ),
                             ),
@@ -174,25 +182,23 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                                   S.of(context).pickup,
                                   style: TextStyle(
                                       color:
-                                          settingsRepo.deliveryAddress.value?.address != null ? Theme.of(context).hintColor : Theme.of(context).primaryColor),
+                                      settingsRepo.deliveryAddress.value?.address != null ? Theme.of(context).hintColor : Theme.of(context).primaryColor),
                                 ),
                               ),
                             ),
                           ],
                         ),
-                        /*if (settingsRepo.deliveryAddress.value?.address != null)
+                        *//*if (settingsRepo.deliveryAddress.value?.address != null)
                           Padding(
                             padding: const EdgeInsets.only(top: 12),
                             child: Text(
                               S.of(context).near_to + " " + (settingsRepo.deliveryAddress.value?.address),
                               style: Theme.of(context).textTheme.caption,
                             ),
-                          ),*/
+                          ),*//*
                       ],
                     ),
-                  );
-                case 'top_markets':
-                  return CardsCarouselWidget(marketsList: _con.topMarkets, heroTag: 'home_top_markets');
+                  );*/
                 case 'trending_week_heading':
                   return ListTile(
                     dense: true,
