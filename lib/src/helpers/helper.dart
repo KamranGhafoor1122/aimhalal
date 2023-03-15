@@ -17,6 +17,7 @@ import '../../generated/l10n.dart';
 import '../elements/CircularLoadingWidget.dart';
 import '../models/cart.dart';
 import '../models/market.dart';
+import '../models/home_categories.dart' as homeCategories;
 import '../models/order.dart';
 import '../models/product_order.dart';
 import '../repository/settings_repository.dart';
@@ -207,6 +208,25 @@ class Helper {
     return _can;
   }
 
+  static bool canDeliveryNew(homeCategories.Market _market, {List<Cart> carts}) {
+    bool _can = true;
+    String _unit = setting.value.distanceUnit;
+    double _deliveryRange = _market.deliveryRange.toDouble();
+    double _distance = _market.distance;
+    carts?.forEach((Cart _cart) {
+      _can &= _cart.product.deliverable;
+    });
+
+    if (_unit == 'km') {
+      _deliveryRange /= 1.60934;
+    }
+    if (_distance == 0 && !deliveryAddress.value.isUnknown()) {
+      _distance = sqrt(pow(69.1 * (double.parse(_market.latitude) - deliveryAddress.value.latitude), 2) +
+          pow(69.1 * (deliveryAddress.value.longitude - double.parse(_market.longitude)) * cos(double.parse(_market.latitude) / 57.3), 2));
+    }
+    _can &= _market.availableForDelivery && (_distance < _deliveryRange) && !deliveryAddress.value.isUnknown();
+    return _can;
+  }
   static String skipHtml(String htmlString) {
     try {
       var document = parse(htmlString);

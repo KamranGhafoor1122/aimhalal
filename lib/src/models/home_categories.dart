@@ -88,6 +88,7 @@ class Market {
     this.deliveryRange,
     this.defaultTax,
      this.closed,
+    this.distance,
      this.active,
      this.availableForDelivery,
      this.createdAt,
@@ -109,6 +110,7 @@ class Market {
   String information;
   int adminCommission;
   int deliveryFee;
+  double distance;
   int deliveryRange;
   int defaultTax;
   bool closed;
@@ -118,6 +120,7 @@ class Market {
   DateTime updatedAt;
   List<dynamic> customFields;
   bool hasMedia;
+
   dynamic rate;
   List<Media> media;
 

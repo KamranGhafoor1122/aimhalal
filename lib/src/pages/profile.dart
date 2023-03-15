@@ -68,7 +68,7 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding:  EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
                       currentUser.value?.bio ?? "",
                       style: Theme.of(context).textTheme.bodyText2,
