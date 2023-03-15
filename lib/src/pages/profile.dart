@@ -74,7 +74,7 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
                   ),
-                  ListTile(
+                 /* ListTile(
                     contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     leading: Icon(
                       Icons.shopping_basket_outlined,
@@ -84,7 +84,7 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
                       S.of(context).recent_orders,
                       style: Theme.of(context).textTheme.headline4,
                     ),
-                  ),
+                  ),*/
                   ListTile(
                     contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     leading: Icon(

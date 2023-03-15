@@ -208,11 +208,12 @@ class Helper {
     return _can;
   }
 
-  static bool canDeliveryNew(homeCategories.Market _market, {List<Cart> carts}) {
+  static bool canDeliveryNew(Market _market, {List<Cart> carts}) {
     bool _can = true;
     String _unit = setting.value.distanceUnit;
-    double _deliveryRange = _market.deliveryRange.toDouble();
+    double _deliveryRange =  _market.deliveryRange== null ? 0: _market.deliveryRange.toDouble();
     double _distance = _market.distance;
+    print("distance : $_distance -- ${_deliveryRange}");
     carts?.forEach((Cart _cart) {
       _can &= _cart.product.deliverable;
     });

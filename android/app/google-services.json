@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "782903466348-fb09fnhuadaktsk9hp1ovph28mg9rgjn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aimhalal.app",
+            "certificate_hash": "4db8e7d501da57bb190ca1e983a083a0c4adc5f4"
+          }
+        },
+        {
           "client_id": "782903466348-jbcfaod5icjsn2m4vugq30a88nt3rjvm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

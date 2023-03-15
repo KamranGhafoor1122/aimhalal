@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:markets/src/models/market.dart';
+
 HomeCategories homeCategoriesFromJson(String str) => HomeCategories.fromJson(json.decode(str));
 
 String homeCategoriesToJson(HomeCategories data) => json.encode(data.toJson());
@@ -57,7 +59,7 @@ class Datum {
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
     image: json["image"],
-    markets: List<Market>.from(json["markets"].map((x) => Market.fromJson(x))),
+    markets: List<Market>.from(json["markets"].map((x) => Market.fromJSON(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -68,10 +70,11 @@ class Datum {
     "created_at": createdAt.toIso8601String(),
     "updated_at": updatedAt.toIso8601String(),
     "image": image,
-    "markets": List<dynamic>.from(markets.map((x) => x.toJson())),
+    "markets": List<dynamic>.from(markets.map((x) => x.toMap())),
   };
 }
 
+/*
 class Market {
   Market({
      this.id,
@@ -88,7 +91,7 @@ class Market {
     this.deliveryRange,
     this.defaultTax,
      this.closed,
-    this.distance,
+    this.distance=0,
      this.active,
      this.availableForDelivery,
      this.createdAt,
@@ -174,6 +177,7 @@ class Market {
     "media": List<dynamic>.from(media.map((x) => x.toJson())),
   };
 }
+*/
 
 class Media {
   Media({

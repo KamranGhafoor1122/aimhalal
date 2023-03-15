@@ -5,6 +5,7 @@ import '../../generated/l10n.dart';
 import '../elements/CardsCarouselLoaderWidget.dart';
 import '../models/market.dart' as M;
 import '../models/route_argument.dart';
+import '../pages/category_details.dart';
 import 'CardWidget.dart';
 
 // ignore: must_be_immutable
@@ -48,35 +49,41 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (ctx,index){
-                         return Column(
-                           crossAxisAlignment: CrossAxisAlignment.center,
-                           children: [
-                             SizedBox(
-                               height: 5,
-                             ),
-
-                             SizedBox(
-                               height: 43,
-                               width: 43,
-                               child: Image.network(widget.homeCategories.data[index].image,
+                         return GestureDetector(
+                           behavior: HitTestBehavior.translucent,
+                           onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>CategoryDetails(markets: widget.homeCategories.data[index].markets,)));
+                           },
+                           child: Column(
+                             crossAxisAlignment: CrossAxisAlignment.center,
+                             children: [
+                               SizedBox(
+                                 height: 5,
                                ),
-                             ),
-                             SizedBox(
-                               height: 5,
-                             ),
-                             Text(
-                               widget.homeCategories.data[index].name,
-                               maxLines: 1,
-                             //  overflow: TextOverflow.ellipsis,
-                               style: Theme.of(context).textTheme.bodySmall.copyWith(
-                                   color: Colors.black,
-                                   fontSize: 8
+
+                               SizedBox(
+                                 height: 43,
+                                 width: 43,
+                                 child: Image.network(widget.homeCategories.data[index].image,
+                                 ),
                                ),
-                             ),
+                               SizedBox(
+                                 height: 5,
+                               ),
+                               Text(
+                                 widget.homeCategories.data[index].name,
+                                 maxLines: 1,
+                               //  overflow: TextOverflow.ellipsis,
+                                 style: Theme.of(context).textTheme.bodySmall.copyWith(
+                                     color: Colors.black,
+                                     fontSize: 8
+                                 ),
+                               ),
 
 
 
-                           ],
+                             ],
+                           ),
                          );
 
                            /*Container(
