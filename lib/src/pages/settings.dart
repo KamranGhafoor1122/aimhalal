@@ -258,7 +258,7 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                         ],
                       ),
                     ),
-                    Container(
+                    /*Container(
                       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                       decoration: BoxDecoration(
                         color: Theme.of(context).primaryColor,
@@ -301,7 +301,7 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                           ),
                         ],
                       ),
-                    ),
+                    ),*/
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                       decoration: BoxDecoration(
@@ -344,7 +344,7 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                               style: TextStyle(color: Theme.of(context).focusColor),
                             ),
                           ),
-                          ListTile(
+                         /* ListTile(
                             onTap: () {
                               Navigator.of(context).pushNamed('/DeliveryAddresses');
                             },
@@ -363,7 +363,7 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                                 ),
                               ],
                             ),
-                          ),
+                          ),*/
                           ListTile(
                             onTap: () {
                               Navigator.of(context).pushNamed('/Help');

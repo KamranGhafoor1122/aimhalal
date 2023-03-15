@@ -28,14 +28,18 @@ class _MapWidgetState extends StateMVC<MapWidget> {
 
   @override
   void initState() {
-    _con.currentMarket = widget.routeArgument?.param as Market;
-    if (_con.currentMarket?.latitude != null) {
-      // user select a market
-      _con.getMarketLocation();
-      _con.getDirectionSteps();
-    } else {
-      _con.getCurrentLocation();
-    }
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async{
+      _con.currentMarket = widget.routeArgument?.param as Market;
+      if (_con.currentMarket?.latitude != null) {
+        // user select a market
+       await _con.getMarketLocation();
+       await _con.getDirectionSteps();
+      } else {
+        await _con.getCurrentLocation();
+      }
+
+      setState(() { });
+    });
     super.initState();
   }
 
@@ -85,7 +89,9 @@ class _MapWidgetState extends StateMVC<MapWidget> {
         alignment: AlignmentDirectional.bottomStart,
         children: <Widget>[
           _con.cameraPosition == null
-              ? CircularLoadingWidget(height: 0)
+              ?
+
+          CircularLoadingWidget(height: 0)
               : GoogleMap(
                   mapToolbarEnabled: false,
                   mapType: MapType.normal,
@@ -105,6 +111,7 @@ class _MapWidgetState extends StateMVC<MapWidget> {
           CardsCarouselWidget(
             marketsList: _con.topMarkets,
             heroTag: 'map_markets',
+            hideCategories: true,
           ),
         ],
       ),

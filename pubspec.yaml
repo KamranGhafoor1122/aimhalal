@@ -55,6 +55,8 @@ dependencies:
   string_validator: 0.3.0
   platform: 3.1.0
   geocoding: ^2.0.5
+  social_login_buttons: ^1.0.7
+  google_sign_in: ^6.0.2
 
 
 dev_dependencies:

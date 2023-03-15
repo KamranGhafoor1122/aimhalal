@@ -12,9 +12,10 @@ import 'CardWidget.dart';
 class CardsCarouselWidget extends StatefulWidget {
   List<M.Market> marketsList;
   HomeCategories homeCategories;
+  bool hideCategories;
   String heroTag;
 
-  CardsCarouselWidget({Key key, this.marketsList, this.heroTag,this.homeCategories}) : super(key: key);
+  CardsCarouselWidget({Key key, this.marketsList, this.heroTag,this.homeCategories,this.hideCategories=false}) : super(key: key);
 
   @override
   _CardsCarouselWidgetState createState() => _CardsCarouselWidgetState();
@@ -35,7 +36,7 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                widget.homeCategories == null ? Center(
+              widget.hideCategories ? Container():  widget.homeCategories == null ? Center(
                   child: CircularProgressIndicator(),
                 ):
                 Padding(

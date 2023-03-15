@@ -24,6 +24,7 @@ Future<userModel.User> login(userModel.User user) async {
   );
   if (response.statusCode == 200) {
     setCurrentUser(response.body);
+    print("logged in user ${response.body}");
     currentUser.value = userModel.User.fromJSON(json.decode(response.body)['data']);
   } else {
     throw new Exception(response.body);
