@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:social_login_buttons/social_login_buttons.dart';
 
 import '../../generated/l10n.dart';
 import '../controllers/user_controller.dart';
@@ -22,9 +24,11 @@ class _LoginWidgetState extends StateMVC<LoginWidget> {
   @override
   void initState() {
     super.initState();
-    if (userRepo.currentUser.value?.apiToken != null) {
-      Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
-    }
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        if (userRepo.currentUser.value?.apiToken != null) {
+         // Navigator.of(context).pushNamed('/Pages', arguments: 3);
+        }
+      });
   }
 
   @override
@@ -152,6 +156,14 @@ class _LoginWidgetState extends StateMVC<LoginWidget> {
               bottom: 10,
               child: Column(
                 children: <Widget>[
+                  SocialLoginButton(
+                    buttonType: SocialLoginButtonType.google,
+                    onPressed: () async{
+                     await  _con.signInWithGoogle();
+
+
+                    },
+                  ),
                   MaterialButton(
                     elevation: 0,
                     onPressed: () {

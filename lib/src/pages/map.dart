@@ -37,11 +37,13 @@ class _MapWidgetState extends StateMVC<MapWidget> {
       } else {
         await _con.getCurrentLocation();
       }
-
       setState(() { });
     });
     super.initState();
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -97,13 +99,16 @@ class _MapWidgetState extends StateMVC<MapWidget> {
                   mapType: MapType.normal,
                   initialCameraPosition: _con.cameraPosition,
                   markers: Set.from(_con.allMarkers),
-                  onMapCreated: (GoogleMapController controller) {
+                  onMapCreated: (GoogleMapController controller)
+                  {
                     _con.mapController.complete(controller);
                   },
-                  onCameraMove: (CameraPosition cameraPosition) {
+                  onCameraMove: (CameraPosition cameraPosition)
+                  {
                     _con.cameraPosition = cameraPosition;
                   },
-                  onCameraIdle: () {
+                  onCameraIdle: ()
+                  {
                     _con.getMarketsOfArea();
                   },
                   polylines: _con.polylines,

@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:global_configuration/global_configuration.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,10 +32,31 @@ Future<userModel.User> login(userModel.User user) async {
   }
   return currentUser.value;
 }
+Future<userModel.User> sociallogin(Map body) async {
+  final String url = '${GlobalConfiguration().getValue('api_base_url')}social_login';
+  final client = new http.Client();
+  final response = await client.post(
+    Uri.parse(url),
+    headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+    body: json.encode(body),
+  );
+  if (response.statusCode == 200) {
+    setCurrentUser(response.body);
+    print("logged in user ${response.body}");
+    currentUser.value = userModel.User.fromJSON(json.decode(response.body)['data']);
+  } else {
+    throw new Exception(response.body);
+  }
+  return currentUser.value;
+}
+
 
 Future<userModel.User> register(userModel.User user) async {
   final String url = '${GlobalConfiguration().getValue('api_base_url')}register';
   final client = new http.Client();
+
+  print("register url: ${url}");
+  print("register body: ${user.toMap()}");
   final response = await client.post(
     Uri.parse(url),
     headers: {HttpHeaders.contentTypeHeader: 'application/json'},
@@ -65,6 +87,13 @@ Future<bool> resetPassword(userModel.User user) async {
 }
 
 Future<void> logout() async {
+  GoogleSignIn googleSignIn = GoogleSignIn();
+  bool signedIn = await googleSignIn.isSignedIn();
+  print("signed in $signedIn");
+  if(signedIn){
+    await googleSignIn.signOut();
+    //await googleSignIn.disconnect();
+  }
   currentUser.value = new userModel.User();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.remove('current_user');

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:markets/src/pages/notifications.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -194,8 +195,9 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
           ),
 
           ListTile(
-            onTap: () {
+            onTap: () async{
               if (currentUser.value.apiToken != null) {
+
                 logout().then((value) {
                   Navigator.of(context).pushNamedAndRemoveUntil('/Pages', (Route<dynamic> route) => false, arguments: 0);
                 });

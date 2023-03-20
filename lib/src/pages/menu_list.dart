@@ -62,7 +62,7 @@ class _MenuWidgetState extends StateMVC<MenuWidget> {
           style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 0)),
         ),
         actions: <Widget>[
-          new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
+         // new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

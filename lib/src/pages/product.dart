@@ -43,7 +43,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
   @override
   void initState() {
     _con.listenForProduct(productId: widget.routeArgument.id);
-     print("pp : ${(widget.routeArgument.param as Market).mobile}");
+    // print("pp : ${(widget.routeArgument.param as Market).mobile}");
     _con.listenForCart();
     _con.listenForFavorite(productId: widget.routeArgument.id);
     super.initState();
@@ -406,7 +406,10 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                   child: MaterialButton(
                                       elevation: 0,
                                       onPressed: () {
-                                        launch("tel:${(widget.routeArgument.param as Market).mobile}");
+                                        if((widget.routeArgument.param as Market).mobile != null){
+                                          launch("tel:${(widget.routeArgument.param as Market).mobile}");
+                                        }
+
                                       },
                                       padding: EdgeInsets.symmetric(vertical: 14),
                                       color: Theme.of(context).accentColor,

@@ -11,11 +11,13 @@ import '../models/route_argument.dart';
 class PayPalPaymentWidget extends StatefulWidget {
   RouteArgument routeArgument;
   PayPalPaymentWidget({Key key, this.routeArgument}) : super(key: key);
+
   @override
   _PayPalPaymentWidgetState createState() => _PayPalPaymentWidgetState();
 }
 
 class _PayPalPaymentWidgetState extends StateMVC<PayPalPaymentWidget> {
+
   PayPalController _con;
   _PayPalPaymentWidgetState() : super(PayPalController()) {
     _con = controller;

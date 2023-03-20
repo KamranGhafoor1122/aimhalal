@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:markets/src/models/home_categories.dart';
+import 'package:markets/src/pages/evevnts.dart';
 
 import '../../generated/l10n.dart';
 import '../elements/CardsCarouselLoaderWidget.dart';
 import '../models/market.dart' as M;
 import '../models/route_argument.dart';
 import '../pages/category_details.dart';
+import '../pages/directories.dart';
+import '../pages/my_webview.dart';
 import 'CardWidget.dart';
 
 // ignore: must_be_immutable
@@ -53,8 +56,24 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
                          return GestureDetector(
                            behavior: HitTestBehavior.translucent,
                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>CategoryDetails(markets: widget.homeCategories.data[index].markets,)));
-                           },
+
+                              if(widget.homeCategories.data[index].name == "Quran Learning"){
+                                print("cat: ${widget.homeCategories.data[index].url}");
+                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>MyWebview(title: "Quran Learning", url: widget.homeCategories.data[index].url)));
+                              }
+                              else if(widget.homeCategories.data[index].name == "Events"){
+                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>EventsWidget()));
+
+                              }
+                              else if(widget.homeCategories.data[index].name == "Halal Directory"){
+                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>DirectoryWidget()));
+
+                              }
+                              else{
+                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>CategoryDetails(markets: widget.homeCategories.data[index].markets,)));
+                              }
+
+                              },
                            child: Column(
                              crossAxisAlignment: CrossAxisAlignment.center,
                              children: [

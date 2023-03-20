@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:markets/src/helpers/custom_trace.dart';
+import 'package:markets/src/helpers/helper.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-
+import 'package:http/http.dart' as http;
 import '../../generated/l10n.dart';
 import '../models/order.dart';
 import '../repository/order_repository.dart';
@@ -34,8 +36,19 @@ class ProfileController extends ControllerMVC {
     });
   }
 
-  Future<void> refreshProfile() async {
-    recentOrders.clear();
-    listenForRecentOrders(message: S.of(state.context).orders_refreshed_successfuly);
+
+  Future<http.Response> deleteAccount(String userId) async {
+    Uri uri = Helper.getUri('api/delete_user');
+    try {
+       Map<String,dynamic> body = {
+         "user_id":userId
+       };
+      var response = await http.post(uri,body: body);
+      print("home cat res: ${response.statusCode} -- ${response.body}");
+      return response;
+    } catch (e) {
+      print(CustomTrace(StackTrace.current, message: e.toString()).toString());
+      return null;
+    }
   }
 }

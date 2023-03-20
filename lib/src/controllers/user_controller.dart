@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
 import '../helpers/helper.dart';
 import '../models/user.dart' as model;
+import 'package:http/http.dart' as http;
 import '../pages/mobile_verification_2.dart';
 import '../repository/user_repository.dart' as repository;
 
@@ -29,6 +31,37 @@ class UserController extends ControllerMVC {
     });
   }
 
+  Future<void> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth = await googleUser?.authentication;
+
+    Map mapBody = {
+    "type":1,
+    "email": googleUser.email,
+      "social_token":googleAuth.accessToken
+  };
+
+
+    await socialLogin(mapBody);
+
+
+
+
+
+
+    // Create a new credential
+    // final credential = GoogleAuthProvider.credential(
+    //   accessToken: googleAuth?.accessToken,
+    //   idToken: googleAuth?.idToken,
+    // );
+    //
+    // // Once signed in, return the UserCredential
+    // UserCredential user = await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
   void login() async {
     loader = Helper.overlayLoader(state.context);
     FocusScope.of(state.context).unfocus();
@@ -37,6 +70,7 @@ class UserController extends ControllerMVC {
       Overlay.of(state.context).insert(loader);
       repository.login(user).then((value) {
         if (value != null && value.apiToken != null) {
+
           Navigator.of(scaffoldKey.currentContext).pushReplacementNamed('/Pages', arguments: 0);
         } else {
           ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
@@ -53,6 +87,32 @@ class UserController extends ControllerMVC {
       });
     }
   }
+
+
+  Future socialLogin(Map body) async {
+    loader = Helper.overlayLoader(state.context);
+    FocusScope.of(state.context).unfocus();
+      Overlay.of(state.context).insert(loader);
+      repository.sociallogin(body).then((value) {
+        if (value != null && value.apiToken != null) {
+           print("social login val ${value.toMap()}");
+          Navigator.of(scaffoldKey.currentContext).pushReplacementNamed('/Pages', arguments: 0);
+        } else {
+          ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+            content: Text(S.of(state.context).wrong_email_or_password),
+          ));
+        }
+      }).catchError((e) {
+        loader.remove();
+        ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+          content: Text(S.of(state.context).this_account_not_exist),
+        ));
+      }).whenComplete(() {
+        Helper.hideLoader(loader);
+      });
+
+  }
+
 
   Future<void> verifyPhone(model.User user) async {
     final PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId) {
@@ -139,4 +199,6 @@ class UserController extends ControllerMVC {
       });
     }
   }
+
+
 }
