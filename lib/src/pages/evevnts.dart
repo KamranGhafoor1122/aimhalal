@@ -60,12 +60,12 @@ class _EventsWidgetState extends StateMVC<EventsWidget> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: SearchBarWidget(onClickFilter: (e) {
-                        Scaffold.of(context).openEndDrawer();
-                      }),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 20),
+                    //   child: SearchBarWidget(onClickFilter: (e) {
+                    //     Scaffold.of(context).openEndDrawer();
+                    //   }),
+                    // ),
                     SizedBox(height: 10),
 
                     _con.events.isEmpty

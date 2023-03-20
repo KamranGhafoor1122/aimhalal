@@ -13,6 +13,7 @@ import '../pages/orders.dart';
 import 'package:flutter_svg/svg.dart';
 import '../repository/settings_repository.dart';
 import 'messages.dart';
+import 'post_food.dart';
 import 'profile.dart';
 
 // ignore: must_be_immutable
@@ -57,7 +58,7 @@ class _PagesWidgetState extends State<PagesWidget> {
   void _selectTab(int tabItem) {
     setState(() {
 
-      if(tabItem != 2){
+      if(tabItem != 3){
         widget.currentTab = tabItem;
       }
       switch (tabItem) {
@@ -75,10 +76,14 @@ class _PagesWidgetState extends State<PagesWidget> {
           break;
 
         case 2:
-          Navigator.of(navigatorKey.currentContext).push(SearchModal());
+          widget.currentPage = PostFood(parentScaffoldKey: widget.scaffoldKey);
           break;
 
         case 3:
+          Navigator.of(navigatorKey.currentContext).push(SearchModal());
+          break;
+
+        case 4:
           widget.currentPage = ProfileWidget(
             parentScaffoldKey: widget.scaffoldKey,
           );
@@ -136,29 +141,34 @@ class _PagesWidgetState extends State<PagesWidget> {
               label: 'Discover',
             ),
 
-               /* Container(
-                  width: 42,
-                  height: 42,
-                  margin: EdgeInsets.only(bottom: 5),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).accentColor,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(50),
-                    ),
-                    boxShadow: [
-                      BoxShadow(color: Theme.of(context).accentColor.withOpacity(0.4), blurRadius: 40, offset: Offset(0, 15)),
-                      BoxShadow(color: Theme.of(context).accentColor.withOpacity(0.4), blurRadius: 13, offset: Offset(0, 3))
-                    ],
-                  ),
-                  child: new Icon(widget.currentTab == 2 ? Icons.home : Icons.home_outlined, color: Theme.of(context).primaryColor),
-                )*/
 
             BottomNavigationBarItem(
-              icon: new Icon(  Icons.search,color: widget.currentTab == 2 ? Theme.of(context).accentColor:Colors.grey,),
+              label:"",
+              icon: Container(
+              width: 42,
+              height: 42,
+              margin: EdgeInsets.only(bottom: 5),
+              decoration: BoxDecoration(
+                color: Theme.of(context).accentColor,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(50),
+                ),
+                boxShadow: [
+                  BoxShadow(color: Theme.of(context).accentColor.withOpacity(0.4), blurRadius: 40, offset: Offset(0, 15)),
+                  BoxShadow(color: Theme.of(context).accentColor.withOpacity(0.4), blurRadius: 13, offset: Offset(0, 3))
+                ],
+              ),
+              child: new Icon(widget.currentTab == 2 ? Icons.add : Icons.add, color: Theme.of(context).primaryColor),
+            ), ),
+
+
+
+            BottomNavigationBarItem(
+              icon: new Icon(  Icons.search,color: widget.currentTab == 3 ? Theme.of(context).accentColor:Colors.grey,),
               label: 'Search',
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset("assets/img/profile.svg", color: widget.currentTab == 3? Theme.of(context).accentColor:Colors.grey,),
+              icon: SvgPicture.asset("assets/img/profile.svg", color: widget.currentTab == 4? Theme.of(context).accentColor:Colors.grey,),
               label: 'Profile',
             ),
           ],
