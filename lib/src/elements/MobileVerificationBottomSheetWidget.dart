@@ -36,7 +36,9 @@ class _MobileVerificationBottomSheetWidgetState extends State<MobileVerification
       currentUser.value.verificationId = verId;
     };
     final PhoneVerificationCompleted _verifiedSuccess = (AuthCredential auth) {};
-    final PhoneVerificationFailed _verifyFailed = (FirebaseAuthException e) {};
+    final PhoneVerificationFailed _verifyFailed = (FirebaseAuthException e) {
+      print("verification failed; ${e.toString()}");
+    };
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: widget.user.phone,
       timeout: const Duration(seconds: 5),

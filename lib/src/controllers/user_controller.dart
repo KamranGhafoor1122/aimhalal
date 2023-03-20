@@ -1,9 +1,15 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../generated/l10n.dart';
 import '../helpers/helper.dart';
 import '../models/user.dart' as model;
@@ -29,6 +35,21 @@ class UserController extends ControllerMVC {
     }).catchError((e) {
       print('Notification not configured');
     });
+  }
+
+  String generateNonce([int length = 32]) {
+    final charset =
+        '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+    final random = Random.secure();
+    return List.generate(length, (_) => charset[random.nextInt(charset.length)])
+        .join();
+  }
+
+  /// Returns the sha256 hash of [input] in hex notation.
+  String sha256ofString(String input) {
+    final bytes = utf8.encode(input);
+    final digest = sha256.convert(bytes);
+    return digest.toString();
   }
 
   Future<void> signInWithGoogle() async {
@@ -197,6 +218,35 @@ class UserController extends ControllerMVC {
       }).whenComplete(() {
         Helper.hideLoader(loader);
       });
+    }
+  }
+
+
+  Future<void> signInWithApple() async {
+    final rawNonce = generateNonce();
+    final nonce = sha256ofString(rawNonce);
+
+    final appleCredential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+      nonce: nonce,
+    );
+
+    final oauthCredential = OAuthProvider("apple.com").credential(
+      idToken: appleCredential.identityToken,
+      rawNonce: rawNonce,
+    );
+    UserCredential credential = await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+
+    if(credential.user != null){
+      Map mapBody = {
+        "type":1,
+        "email": credential.user.email,
+        "social_token":credential.user.uid
+      };
+      await socialLogin(mapBody);
     }
   }
 

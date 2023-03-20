@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../helpers/helper.dart';
 import '../models/address.dart';
@@ -89,6 +91,13 @@ Future<bool> resetPassword(userModel.User user) async {
 Future<void> logout() async {
   GoogleSignIn googleSignIn = GoogleSignIn();
   bool signedIn = await googleSignIn.isSignedIn();
+
+  User user  = await FirebaseAuth.instance.currentUser;
+
+  if(user != null){
+    await FirebaseAuth.instance.signOut();
+  }
+
   print("signed in $signedIn");
   if(signedIn){
     await googleSignIn.signOut();
