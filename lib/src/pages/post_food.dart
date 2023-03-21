@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+
+import '../../generated/l10n.dart';
 class PostFood extends StatefulWidget {
   final GlobalKey<ScaffoldState> parentScaffoldKey;
    PostFood({Key key,this.parentScaffoldKey}) : super(key: key);
@@ -43,9 +45,9 @@ class _PostFoodState extends State<PostFood> {
               vertical: 12
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
-                Row(
+               /* Row(
                   children: [
                     Expanded(child: Container(
                       height: 80,
@@ -167,7 +169,164 @@ class _PostFoodState extends State<PostFood> {
                       ),
                     )),
                   ],
-                )
+                )*/
+
+                Text("Title", style: Theme.of(context).textTheme.bodyLarge.copyWith(
+                  fontWeight: FontWeight.w600
+                ),),
+
+                SizedBox(
+                  height: 8,
+                ),
+                TextField(
+                  onSubmitted: (text) async {
+                  },
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(12),
+                    hintText: "Title",
+                    hintStyle: Theme.of(context).textTheme.caption.merge(TextStyle(fontSize: 14)),
+                    border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.3))),
+                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                  ),
+                ),
+
+                SizedBox(
+                  height: 28,
+                ),
+
+                Text("Type", style: Theme.of(context).textTheme.bodyLarge.copyWith(
+                    fontWeight: FontWeight.w600
+                ),),
+
+                SizedBox(
+                  height: 8,
+                ),
+                TextField(
+                  onSubmitted: (text) async {
+                  },
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(12),
+                    hintText: "Type",
+                    hintStyle: Theme.of(context).textTheme.caption.merge(TextStyle(fontSize: 14)),
+                    border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.3))),
+                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                  ),
+                ),
+
+
+                SizedBox(
+                  height: 28,
+                ),
+
+                Text("Pricec", style: Theme.of(context).textTheme.bodyLarge.copyWith(
+                    fontWeight: FontWeight.w600
+                ),),
+
+                SizedBox(
+                  height: 8,
+                ),
+                TextField(
+                  onSubmitted: (text) async {
+                  },
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(12),
+                    hintText: "Price",
+                    hintStyle: Theme.of(context).textTheme.caption.merge(TextStyle(fontSize: 14)),
+                    border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.3))),
+                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                  ),
+                ),
+
+
+                SizedBox(
+                  height: 28,
+                ),
+
+                Text("Contact Number", style: Theme.of(context).textTheme.bodyLarge.copyWith(
+                    fontWeight: FontWeight.w600
+                ),),
+
+                SizedBox(
+                  height: 8,
+                ),
+                TextField(
+                  onSubmitted: (text) async {
+                  },
+                  autofocus: true,
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(12),
+                    hintText: "Number",
+                    hintStyle: Theme.of(context).textTheme.caption.merge(TextStyle(fontSize: 14)),
+                    border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.3))),
+                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                  ),
+                ),
+
+
+
+                SizedBox(
+                  height: 28,
+                ),
+
+                Text("Location", style: Theme.of(context).textTheme.bodyLarge.copyWith(
+                    fontWeight: FontWeight.w600
+                ),),
+
+                SizedBox(
+                  height: 8,
+                ),
+                TextField(
+                  onSubmitted: (text) async {
+                  },
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(12),
+                    hintText: "Location",
+                    suffixIcon: Icon(Icons.my_location, color: Theme.of(context).accentColor),
+                    hintStyle: Theme.of(context).textTheme.caption.merge(TextStyle(fontSize: 14)),
+                    border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.3))),
+                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                  ),
+                ),
+
+
+                SizedBox(
+                  height: 28,
+                ),
+
+                Text("Details", style: Theme.of(context).textTheme.bodyLarge.copyWith(
+                    fontWeight: FontWeight.w600
+                ),),
+
+                SizedBox(
+                  height: 8,
+                ),
+                TextField(
+                  onSubmitted: (text) async {
+                  },
+                  maxLines: 4,
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(12),
+                    hintText: "Details",
+                    hintStyle: Theme.of(context).textTheme.caption.merge(TextStyle(fontSize: 14)),
+                    border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.3))),
+                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                  ),
+                ),
+
+
+
               ],
             ),
           ),
