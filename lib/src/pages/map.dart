@@ -113,10 +113,13 @@ class _MapWidgetState extends StateMVC<MapWidget> {
                   },
                   polylines: _con.polylines,
                 ),
-          CardsCarouselWidget(
-            marketsList: _con.topMarkets,
-            heroTag: 'map_markets',
-            hideCategories: true,
+          Align(
+           alignment: Alignment.bottomCenter,
+            child: CardsCarouselWidget(
+              marketsList: _con.topMarkets,
+              heroTag: 'map_markets',
+              hideCategories: true,
+            ),
           ),
         ],
       ),

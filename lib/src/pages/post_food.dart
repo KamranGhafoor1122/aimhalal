@@ -53,7 +53,7 @@ class _PostFoodState extends State<PostFood> {
                       decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
                           border: Border.all(
-                              color: Colors.black,
+                              color: Theme.of(context).brightness == Brightness.dark ?Colors.white:Colors.black,
                               width: 2
                           ),
                           borderRadius: BorderRadius.circular(8)
@@ -62,7 +62,7 @@ class _PostFoodState extends State<PostFood> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.image,color: Colors.black,),
+                          Icon(Icons.image, color: Theme.of(context).brightness == Brightness.dark ?Colors.white:Colors.black,),
                           SizedBox(
                             height: 5,
                           ),
@@ -84,7 +84,7 @@ class _PostFoodState extends State<PostFood> {
                       decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
                           border: Border.all(
-                              color: Colors.black,
+                              color: Theme.of(context).brightness == Brightness.dark ?Colors.white:Colors.black,
                               width: 2
                           ),
                           borderRadius: BorderRadius.circular(8)
@@ -93,7 +93,7 @@ class _PostFoodState extends State<PostFood> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.image,color: Colors.black,),
+                          Icon(Icons.image, color: Theme.of(context).brightness == Brightness.dark ?Colors.white:Colors.black,),
                           SizedBox(
                             height: 5,
                           ),
@@ -114,7 +114,7 @@ class _PostFoodState extends State<PostFood> {
                       decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
                           border: Border.all(
-                              color: Colors.black,
+                              color: Theme.of(context).brightness == Brightness.dark ?Colors.white:Colors.black,
                               width: 2
                           ),
                           borderRadius: BorderRadius.circular(8)
@@ -123,7 +123,7 @@ class _PostFoodState extends State<PostFood> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.image,color: Colors.black,),
+                          Icon(Icons.image, color: Theme.of(context).brightness == Brightness.dark ?Colors.white:Colors.black,),
                           SizedBox(
                             height: 5,
                           ),
@@ -145,7 +145,7 @@ class _PostFoodState extends State<PostFood> {
                       decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
                           border: Border.all(
-                              color: Colors.black,
+                              color: Theme.of(context).brightness == Brightness.dark ?Colors.white:Colors.black,
                               width: 2
                           ),
                           borderRadius: BorderRadius.circular(8)
@@ -154,7 +154,7 @@ class _PostFoodState extends State<PostFood> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.image,color: Colors.black,),
+                          Icon(Icons.image, color: Theme.of(context).brightness == Brightness.dark ?Colors.white:Colors.black,),
                           SizedBox(
                             height: 5,
                           ),

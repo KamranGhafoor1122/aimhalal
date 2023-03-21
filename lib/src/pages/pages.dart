@@ -58,7 +58,7 @@ class _PagesWidgetState extends State<PagesWidget> {
   void _selectTab(int tabItem) {
     setState(() {
 
-      if(tabItem != 3){
+      if(tabItem != 2){
         widget.currentTab = tabItem;
       }
       switch (tabItem) {
@@ -75,15 +75,15 @@ class _PagesWidgetState extends State<PagesWidget> {
           widget.currentPage = MapWidget(parentScaffoldKey: widget.scaffoldKey, routeArgument: widget.routeArgument);
           break;
 
-        case 2:
+        /*case 2:
           widget.currentPage = PostFood(parentScaffoldKey: widget.scaffoldKey);
-          break;
+          break;*/
 
-        case 3:
+        case 2:
           Navigator.of(navigatorKey.currentContext).push(SearchModal());
           break;
 
-        case 4:
+        case 3:
           widget.currentPage = ProfileWidget(
             parentScaffoldKey: widget.scaffoldKey,
           );
@@ -142,33 +142,33 @@ class _PagesWidgetState extends State<PagesWidget> {
             ),
 
 
-            BottomNavigationBarItem(
-              label:"",
-              icon: Container(
-              width: 42,
-              height: 42,
-              margin: EdgeInsets.only(bottom: 5),
-              decoration: BoxDecoration(
-                color: Theme.of(context).accentColor,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(50),
-                ),
-                boxShadow: [
-                  BoxShadow(color: Theme.of(context).accentColor.withOpacity(0.4), blurRadius: 40, offset: Offset(0, 15)),
-                  BoxShadow(color: Theme.of(context).accentColor.withOpacity(0.4), blurRadius: 13, offset: Offset(0, 3))
-                ],
-              ),
-              child: new Icon(widget.currentTab == 2 ? Icons.add : Icons.add, color: Theme.of(context).primaryColor),
-            ), ),
+            // BottomNavigationBarItem(
+            //   label:"",
+            //   icon: Container(
+            //   width: 42,
+            //   height: 42,
+            //   margin: EdgeInsets.only(bottom: 5),
+            //   decoration: BoxDecoration(
+            //     color: Theme.of(context).accentColor,
+            //     borderRadius: BorderRadius.all(
+            //       Radius.circular(50),
+            //     ),
+            //     boxShadow: [
+            //       BoxShadow(color: Theme.of(context).accentColor.withOpacity(0.4), blurRadius: 40, offset: Offset(0, 15)),
+            //       BoxShadow(color: Theme.of(context).accentColor.withOpacity(0.4), blurRadius: 13, offset: Offset(0, 3))
+            //     ],
+            //   ),
+            //   child: new Icon(widget.currentTab == 2 ? Icons.add : Icons.add, color: Theme.of(context).primaryColor),
+            // ), ),
 
 
 
             BottomNavigationBarItem(
-              icon: new Icon(  Icons.search,color: widget.currentTab == 3 ? Theme.of(context).accentColor:Colors.grey,),
+              icon: new Icon(  Icons.search,color: widget.currentTab == 2 ? Theme.of(context).accentColor:Colors.grey,),
               label: 'Search',
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset("assets/img/profile.svg", color: widget.currentTab == 4? Theme.of(context).accentColor:Colors.grey,),
+              icon: SvgPicture.asset("assets/img/profile.svg", color: widget.currentTab == 3? Theme.of(context).accentColor:Colors.grey,),
               label: 'Profile',
             ),
           ],

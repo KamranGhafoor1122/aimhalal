@@ -38,16 +38,17 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
             //height: 400,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
               widget.hideCategories ? Container():  widget.homeCategories == null ? Center(
                   child: CircularProgressIndicator(),
                 ):
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5,
-                  crossAxisSpacing: 8,
-                    mainAxisSpacing: 7,
-                    childAspectRatio: 0.88
+                  child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,
+                  crossAxisSpacing: 4,
+                    mainAxisSpacing: 3,
+                    childAspectRatio: 0.80
                   ),
                       itemCount: widget.homeCategories.data.length,
                       physics: NeverScrollableScrollPhysics(),
@@ -56,23 +57,19 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
                          return GestureDetector(
                            behavior: HitTestBehavior.translucent,
                            onTap: (){
-
                               if(widget.homeCategories.data[index].name == "Quran Learning"){
                                 print("cat: ${widget.homeCategories.data[index].url}");
                                 Navigator.push(context, MaterialPageRoute(builder: (ctx)=>MyWebview(title: "Quran Learning", url: widget.homeCategories.data[index].url)));
                               }
                               else if(widget.homeCategories.data[index].name == "Events"){
                                 Navigator.push(context, MaterialPageRoute(builder: (ctx)=>EventsWidget()));
-
                               }
                               else if(widget.homeCategories.data[index].name == "Halal Directory"){
                                 Navigator.push(context, MaterialPageRoute(builder: (ctx)=>DirectoryWidget()));
-
                               }
                               else{
                                 Navigator.push(context, MaterialPageRoute(builder: (ctx)=>CategoryDetails(markets: widget.homeCategories.data[index].markets,)));
                               }
-
                               },
                            child: Column(
                              crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,8 +79,8 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
                                ),
 
                                SizedBox(
-                                 height: 43,
-                                 width: 43,
+                                 height: 60,
+                                 width: 60,
                                  child: Image.network(widget.homeCategories.data[index].image,
                                  ),
                                ),
@@ -92,12 +89,12 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
                                ),
                                Text(
                                  widget.homeCategories.data[index].name,
-                                 maxLines: 1,
+                               textAlign: TextAlign.center,
                                //  overflow: TextOverflow.ellipsis,
                                  style: Theme.of(context).textTheme.bodySmall.copyWith(
-                                     color: Colors.black,
-                                     fontSize: 8
-                                 ),
+                                   fontWeight: FontWeight.w500,
+                                   color: Theme.of(context).brightness == Brightness.dark ? Colors.white: Colors.black
+                                 )
                                ),
 
 
