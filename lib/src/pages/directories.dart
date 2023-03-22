@@ -61,11 +61,26 @@ class _DirectoryWidgetState extends StateMVC<DirectoryWidget> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
+                    SizedBox(
+                      height: 8,
+                    ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: SearchBarWidget(onClickFilter: (e) {
-                        Scaffold.of(context).openEndDrawer();
-                      }),
+                      padding: const EdgeInsets.all(12.0),
+                      child: TextField(
+                        onSubmitted: (text) async {
+                        },
+                        autofocus: true,
+                        keyboardType: TextInputType.phone,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(12),
+                          prefixIcon: Icon(Icons.search, color: Theme.of(context).accentColor),
+                          hintText: "Search",
+                          hintStyle: Theme.of(context).textTheme.caption.merge(TextStyle(fontSize: 14)),
+                          border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.3))),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                        ),
+                      ),
                     ),
                     SizedBox(height: 10),
 

@@ -61,7 +61,7 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
                                 print("cat: ${widget.homeCategories.data[index].url}");
                                 Navigator.push(context, MaterialPageRoute(builder: (ctx)=>MyWebview(title: "Quran Learning", url: widget.homeCategories.data[index].url)));
                               }
-                              else if(widget.homeCategories.data[index].name == "Events"){
+                              else if(widget.homeCategories.data[index].name.contains("Events")){
                                 Navigator.push(context, MaterialPageRoute(builder: (ctx)=>EventsWidget()));
                               }
                               else if(widget.homeCategories.data[index].name == "Halal Directory"){
@@ -88,7 +88,7 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
                                  height: 5,
                                ),
                                Text(
-                                 widget.homeCategories.data[index].name,
+                                 widget.homeCategories.data[index].name.replaceFirst(" ", "\n"),
                                textAlign: TextAlign.center,
                                //  overflow: TextOverflow.ellipsis,
                                  style: Theme.of(context).textTheme.bodySmall.copyWith(
@@ -137,15 +137,16 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
                     scrollDirection: Axis.horizontal,
                     itemCount: widget.marketsList.length,
                     itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
+                      return
+                        GestureDetector(
+                         onTap: () {
                           Navigator.of(context).pushNamed('/Details',
                               arguments: RouteArgument(
                                 id: '0',
                                 param: widget.marketsList.elementAt(index).id,
                                 heroTag: widget.heroTag,
                               ));
-                        },
+                         },
                         child: CardWidget(market: widget.marketsList.elementAt(index), heroTag: widget.heroTag),
                       );
                     },

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:markets/src/elements/BlockButtonWidget.dart';
 
 import '../../generated/l10n.dart';
 class PostFood extends StatefulWidget {
@@ -222,7 +223,7 @@ class _PostFoodState extends State<PostFood> {
                   height: 28,
                 ),
 
-                Text("Pricec", style: Theme.of(context).textTheme.bodyLarge.copyWith(
+                Text("Price", style: Theme.of(context).textTheme.bodyLarge.copyWith(
                     fontWeight: FontWeight.w600
                 ),),
 
@@ -324,6 +325,25 @@ class _PostFoodState extends State<PostFood> {
                     enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
                   ),
                 ),
+
+
+                SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  child: BlockButtonWidget(
+                    text: Text(
+                      "Submit",
+                      style:
+                      TextStyle(color: Theme.of(context).primaryColor),
+                    ),
+
+                    color: Theme.of(context).accentColor,
+                    onPressed: () {
+
+                    },
+                  ),
+                ),
+
 
 
 
