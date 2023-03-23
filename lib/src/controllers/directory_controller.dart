@@ -12,6 +12,7 @@ import '../repository/product_repository.dart';
 
 class DirectoryController extends ControllerMVC {
   List<Data> directories = <Data>[];
+  List<Data> directoriesAll = <Data>[];
   GlobalKey<ScaffoldState> scaffoldKey;
 
   DirectoryController() {
@@ -26,6 +27,7 @@ class DirectoryController extends ControllerMVC {
         if(response.statusCode == 200){
           DirectoryModel directoryModel = DirectoryModel.fromJson(jsonDecode(response.body));
           directories = directoryModel.data;
+          directoriesAll = directoryModel.data;
           setState(() { });
         }
       } catch (e) {
@@ -33,6 +35,16 @@ class DirectoryController extends ControllerMVC {
         return null;
       }
 
+  }
+
+  searchDirectory(String text) {
+    if(text.isEmpty){
+      directories = directoriesAll;
+    }
+    else{
+      directories = directoriesAll.where((element) => element.name.toLowerCase().contains(text.toLowerCase())).toList();
+    }
+    setState(() {});
   }
  refreshDirectories() async {
     directories.clear();

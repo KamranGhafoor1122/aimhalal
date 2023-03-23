@@ -1,19 +1,24 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:markets/src/helpers/custom_trace.dart';
 import 'package:markets/src/helpers/helper.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:http/http.dart' as http;
 import '../../generated/l10n.dart';
+import '../models/food_model.dart';
 import '../models/order.dart';
 import '../repository/order_repository.dart';
 
 class ProfileController extends ControllerMVC {
   List<Order> recentOrders = [];
+  List<Data> foods = <Data>[];
   GlobalKey<ScaffoldState> scaffoldKey;
 
   ProfileController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
     listenForRecentOrders();
+    fetchShowFoods();
   }
 
   void listenForRecentOrders({String message}) async {
@@ -34,6 +39,21 @@ class ProfileController extends ControllerMVC {
         ));
       }
     });
+  }
+
+  void fetchShowFoods() async {
+    Uri uri = Helper.getUri('api/get_sharefood');
+    try {
+      var response = await http.get(uri);
+      if(response.statusCode == 200){
+        FoodModel foodModel = FoodModel.fromJson(jsonDecode(response.body));
+        foods = foodModel.data;
+        setState(() { });
+      }
+    } catch (e) {
+      print(CustomTrace(StackTrace.current, message: e.toString()).toString());
+      return null;
+    }
   }
 
 

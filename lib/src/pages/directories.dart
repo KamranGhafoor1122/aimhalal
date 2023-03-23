@@ -69,8 +69,11 @@ class _DirectoryWidgetState extends StateMVC<DirectoryWidget> {
                       child: TextField(
                         onSubmitted: (text) async {
                         },
-                        autofocus: true,
-                        keyboardType: TextInputType.phone,
+                        autofocus: false,
+                        onChanged: (query){
+                          _con.searchDirectory(query);
+                        },
+                        keyboardType: TextInputType.text,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.all(12),
                           prefixIcon: Icon(Icons.search, color: Theme.of(context).accentColor),

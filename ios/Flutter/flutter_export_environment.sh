@@ -1,12 +1,12 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=/Users/macbookpro/Desktop/development/flutter"
-export "FLUTTER_APPLICATION_PATH=/Users/macbookpro/Desktop/GitHub/aimhalal"
+export "FLUTTER_ROOT=C:\Users\DELL\Documents\Flutter Windows\flutter-3.3.3\flutter"
+export "FLUTTER_APPLICATION_PATH=C:\Users\DELL\StudioProjects\flutter_application"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
-export "FLUTTER_TARGET=lib/main.dart"
+export "FLUTTER_TARGET=lib\main.dart"
 export "FLUTTER_BUILD_DIR=build"
-export "FLUTTER_BUILD_NAME=2.2.5"
-export "FLUTTER_BUILD_NUMBER=13"
+export "FLUTTER_BUILD_NAME=2.2.6"
+export "FLUTTER_BUILD_NUMBER=14"
 export "DART_OBFUSCATION=false"
 export "TRACK_WIDGET_CREATION=true"
 export "TREE_SHAKE_ICONS=false"

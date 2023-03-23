@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:markets/src/elements/CircularLoadingWidget.dart';
 import 'package:markets/src/repository/user_repository.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../generated/l10n.dart';
@@ -9,6 +10,8 @@ import '../elements/OrderItemWidget.dart';
 import '../elements/PermissionDeniedWidget.dart';
 import '../elements/ProfileAvatarWidget.dart';
 import '../elements/ShoppingCartButtonWidget.dart';
+import '../models/food_model.dart';
+import 'show_foods.dart';
 
 
 
@@ -58,9 +61,9 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
 //              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
               child: Column(
                 children: <Widget>[
-                  ProfileAvatarWidget(user: currentUser.value),
-                  ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  ProfileAvatarWidget(user: currentUser.value,con: _con,),
+                  /*ListTile(
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                     leading: Icon(
                       Icons.person_outline,
                       color: Theme.of(context).hintColor,
@@ -76,7 +79,7 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
                       currentUser.value?.bio ?? "",
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
-                  ),
+                  ),*/
                  /* ListTile(
                     contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     leading: Icon(
@@ -88,100 +91,15 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
                       style: Theme.of(context).textTheme.headline4,
                     ),
                   ),*/
-                  ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                 /* ListTile(
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                     leading: Icon(
                       Icons.delete_outlined,
                       color: Theme.of(context).hintColor,
                     ),
                     onTap: () async{
 
-                      showDialog(context: context, builder: (ctx){
-                        return Dialog(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          backgroundColor: Colors.white,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 15,
-                              vertical: 12
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Delete Account",style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                  color: Theme.of(context).accentColor,
-                                ),),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Text("Are you sure you want to delete your account? After deleting your account , all of your data and activities "
-                                    "inside the app will be deleted and you will not be able to use this account anymore.",style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black,
-                                ),),
-                                SizedBox(
-                                  height: 10,
-                                ),
 
-                                Row(
-                                  children: [
-                                     Expanded(child: TextButton(
-                                       onPressed: (){
-                                         Navigator.pop(context);
-                                       },
-                                       child: Text("Cancel",style: TextStyle(
-                                         fontWeight: FontWeight.w500,
-                                         color: Theme.of(context).accentColor
-                                       ),),
-                                       style: TextButton.styleFrom(
-                                         shape: RoundedRectangleBorder(
-                                           borderRadius: BorderRadius.circular(8),
-                                           side: BorderSide(
-                                             color: Theme.of(context).accentColor,
-                                           )
-                                         )
-                                       ),
-                                     )),
-
-                                    SizedBox(
-                                      width: 15,
-                                    ),
-
-                                    Expanded(child: ElevatedButton(
-                                      onPressed: () async{
-                                        Navigator.pop(context);
-                                         print("user idd: ${currentUser.value.id}");
-                                         var response =  await _con.deleteAccount(currentUser.value.id);
-                                         if(response.statusCode == 200){
-                                           await logout();
-                                           Navigator.of(context).pushNamedAndRemoveUntil('/Pages', (Route<dynamic> route) => false, arguments: 0);
-                                         }
-                                         },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Theme.of(context).accentColor,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                      ),
-                                      child: Text("Delete",style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white
-                                      ),),
-                                    )),
-                                  ],
-                                )
-
-                              ],
-                            ),
-                          ),
-                        );
-                      });
 
 
                     },
@@ -189,8 +107,25 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
                       "Delete Account",
                       style: Theme.of(context).textTheme.headline4,
                     ),
-                  ),
-                  _con.recentOrders.isEmpty
+                  ),*/
+
+                 /* ListTile(
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    leading: Icon(
+                      Icons.emoji_food_beverage_sharp,
+                      color: Theme.of(context).hintColor,
+                    ),
+                    onTap: () async{
+                      Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=>ShowFoods()));
+
+
+                    },
+                    title: Text(
+                      "Foods",
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                  ),*/
+                 /* _con.recentOrders.isEmpty
                       ? EmptyOrdersWidget()
                       : ListView.separated(
                           scrollDirection: Axis.vertical,
@@ -204,7 +139,225 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
                           separatorBuilder: (context, index) {
                             return SizedBox(height: 20);
                           },
-                        ),
+                        ),*/
+
+                  _con.foods.isEmpty
+                      ? CircularLoadingWidget(height: 500)
+                      : GridView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          primary: false,
+                          physics: NeverScrollableScrollPhysics(),
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
+                              crossAxisSpacing: 7,
+                              childAspectRatio: 0.86
+                          ),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 7
+                          ),
+                          itemCount: _con.foods.length,
+                          itemBuilder: (ctx,index) {
+                            Data food = _con.foods[index];
+                            return  Stack(
+                              alignment: AlignmentDirectional.topEnd,
+                              children: <Widget>[
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Hero(
+                                        tag:DateTime.now().millisecondsSinceEpoch.toString(),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(image: AssetImage("assets/img/image_ph.jpg"), fit: BoxFit.cover),
+                                            borderRadius: BorderRadius.circular(5),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text(
+                                      food.title,
+                                      style: Theme.of(context).textTheme.bodyText1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    SizedBox(height: 2),
+                                    Text(
+                                      food.price == 0 ?"Free" : food.price.toString(),
+                                      style: Theme.of(context).textTheme.caption,
+                                      overflow: TextOverflow.ellipsis,
+                                    )
+                                  ],
+                                ),
+                                /*Container(
+            margin: EdgeInsets.all(10),
+            width: 40,
+            height: 40,
+            child: MaterialButton(
+              elevation: 0,
+              padding: EdgeInsets.all(0),
+              onPressed: () {
+                widget.onPressed();
+              },
+              child: Icon(
+                Icons.shopping_cart_outlined,
+                color: Theme.of(context).primaryColor,
+                size: 24,
+              ),
+              color: Theme.of(context).accentColor.withOpacity(0.9),
+              shape: StadiumBorder(),
+            ),
+          ),*/
+                              ],
+                            );
+                            /*Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 15),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            color: Theme
+                                .of(context)
+                                .focusColor
+                                .withOpacity(0.1),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text("Title :", style: Theme
+                                      .of(context)
+                                      .textTheme
+                                      .headline6,),
+                                  SizedBox(width: 10,),
+                                  Text(
+                                    _con.foods[index].title ?? "",
+                                    style: Theme
+                                        .of(context)
+                                        .textTheme
+                                        .bodySmall,
+                                  ),
+
+                                ],
+                              ),
+
+                              SizedBox(
+                                height: 6,
+                              ),
+
+                              Row(
+                                children: [
+                                  Text("Type :", style: Theme
+                                      .of(context)
+                                      .textTheme
+                                      .headline6,),
+                                  SizedBox(width: 10,),
+                                  Text(
+                                    _con.foods[index].type ?? "",
+                                    style: Theme
+                                        .of(context)
+                                        .textTheme
+                                        .bodySmall,
+                                  ),
+
+                                ],
+                              ),
+
+                              SizedBox(
+                                height: 6,
+                              ),
+
+                              Row(
+                                children: [
+                                  Text("Price :", style: Theme
+                                      .of(context)
+                                      .textTheme
+                                      .headline6,),
+                                  SizedBox(width: 10,),
+                                  Text(
+                                    _con.foods[index].price == 0 ? "Free" : _con.foods[index].price.toString(),
+                                    style: Theme
+                                        .of(context)
+                                        .textTheme
+                                        .bodySmall,
+                                  ),
+
+                                ],
+                              ),
+
+
+                              SizedBox(
+                                height: 6,
+                              ),
+
+                              Row(
+                                children: [
+                                  Text("Contact Number :", style: Theme
+                                      .of(context)
+                                      .textTheme
+                                      .headline6,),
+                                  SizedBox(width: 10,),
+                                  Text( _con.foods[index].contactNumber.toString(),
+                                    style: Theme
+                                        .of(context)
+                                        .textTheme
+                                        .bodySmall,
+                                  ),
+
+                                ],
+                              ),
+
+
+                              SizedBox(
+                                height: 6,
+                              ),
+
+                              Row(
+                                children: [
+                                  Text("Location :", style: Theme
+                                      .of(context)
+                                      .textTheme
+                                      .headline6,),
+                                  SizedBox(width: 10,),
+                                  Text(
+                                    _con.foods[index].location.toString(),
+                                    style: Theme
+                                        .of(context)
+                                        .textTheme
+                                        .bodySmall,
+                                  ),
+
+                                ],
+                              ),
+
+
+                              SizedBox(
+                                height: 6,
+                              ),
+
+                              Row(
+                                children: [
+                                  Text("Details :", style: Theme
+                                      .of(context)
+                                      .textTheme
+                                      .headline6,),
+                                  SizedBox(width: 10,),
+                                  Text(
+                                    _con.foods[index].details,
+                                    style: Theme
+                                        .of(context)
+                                        .textTheme
+                                        .bodySmall,
+                                  ),
+
+                                ],
+                              ),
+                            ],
+                          ),
+                        );*/
+                          }
+                      )
                 ],
               ),
             ),
