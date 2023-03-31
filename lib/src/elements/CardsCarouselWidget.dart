@@ -9,6 +9,7 @@ import '../models/route_argument.dart';
 import '../pages/category_details.dart';
 import '../pages/directories.dart';
 import '../pages/my_webview.dart';
+import '../pages/show_foods.dart';
 import 'CardWidget.dart';
 
 // ignore: must_be_immutable
@@ -66,6 +67,9 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
                               }
                               else if(widget.homeCategories.data[index].name == "Halal Directory"){
                                 Navigator.push(context, MaterialPageRoute(builder: (ctx)=>DirectoryWidget()));
+                              }
+                              else if(widget.homeCategories.data[index].name == "Home Chefs"){
+                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>ShowFoods()));
                               }
                               else{
                                 Navigator.push(context, MaterialPageRoute(builder: (ctx)=>CategoryDetails(markets: widget.homeCategories.data[index].markets,)));

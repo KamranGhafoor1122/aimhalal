@@ -102,7 +102,8 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: widget.scaffoldKey,
-        drawer: DrawerWidget(),
+
+        /*drawer: DrawerWidget(),*/
         bottomNavigationBar: Container(
           height: 66,
           decoration: BoxDecoration(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:markets/src/pages/food_details.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -108,38 +109,43 @@ class _ShowFoodsState extends StateMVC<ShowFoods> {
                       itemCount: _con.foods.length,
                       itemBuilder: (ctx,index) {
                         Data food = _con.foods[index];
-                        return  Stack(
-                          alignment: AlignmentDirectional.topEnd,
-                          children: <Widget>[
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Expanded(
-                                  child: Hero(
-                                    tag:DateTime.now().millisecondsSinceEpoch.toString(),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(image: AssetImage("assets/img/image_ph.jpg"), fit: BoxFit.cover),
-                                        borderRadius: BorderRadius.circular(5),
+                        return  GestureDetector(
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (ctx)=>FoodDetails(food: food,)));
+                          },
+                          behavior: HitTestBehavior.translucent,
+                          child: Stack(
+                            alignment: AlignmentDirectional.topEnd,
+                            children: <Widget>[
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Hero(
+                                      tag:DateTime.now().millisecondsSinceEpoch.toString(),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(image: AssetImage("assets/img/image_ph.jpg"), fit: BoxFit.cover),
+                                          borderRadius: BorderRadius.circular(5),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(height: 5),
-                                Text(
-                                  food.title,
-                                  style: Theme.of(context).textTheme.bodyText1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                SizedBox(height: 2),
-                                Text(
-                                  food.price == 0 ?"Free" : food.price.toString(),
-                                  style: Theme.of(context).textTheme.caption,
-                                  overflow: TextOverflow.ellipsis,
-                                )
-                              ],
-                            ),
-                            /*Container(
+                                  SizedBox(height: 5),
+                                  Text(
+                                    food.title,
+                                    style: Theme.of(context).textTheme.bodyText1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  SizedBox(height: 2),
+                                  Text(
+                                    food.price == 0 ?"Free" : food.price.toString(),
+                                    style: Theme.of(context).textTheme.caption,
+                                    overflow: TextOverflow.ellipsis,
+                                  )
+                                ],
+                              ),
+                              /*Container(
             margin: EdgeInsets.all(10),
             width: 40,
             height: 40,
@@ -158,7 +164,8 @@ class _ShowFoodsState extends StateMVC<ShowFoods> {
               shape: StadiumBorder(),
             ),
           ),*/
-                          ],
+                            ],
+                          ),
                         );
                           /*Container(
                           padding: const EdgeInsets.symmetric(

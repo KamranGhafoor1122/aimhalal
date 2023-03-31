@@ -68,8 +68,8 @@ class _MarketWidgetState extends StateMVC<MarketWidget> {
 //                          iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
                           automaticallyImplyLeading: false,
                           leading: new IconButton(
-                            icon: new Icon(Icons.sort, color: Theme.of(context).primaryColor),
-                            onPressed: () => widget.parentScaffoldKey.currentState.openDrawer(),
+                            icon: new Icon(Icons.arrow_back_outlined, color: Theme.of(context).primaryColor),
+                            onPressed: () => Navigator.pop(context),
                           ),
                           flexibleSpace: FlexibleSpaceBar(
                             collapseMode: CollapseMode.parallax,

@@ -55,6 +55,7 @@ Future<Stream<Market>> getPopularMarkets(Address myLocation) async {
   }
   _queryParams.addAll(filter.toQuery());
   uri = uri.replace(queryParameters: _queryParams);
+  print("popular markets $uri");
   try {
     final client = new http.Client();
     final streamedRest = await client.send(http.Request('get', uri));
@@ -120,6 +121,7 @@ Future<Stream<Review>> getMarketReviews(String id) async {
   final String url = '${GlobalConfiguration().getValue('api_base_url')}market_reviews?with=user&search=market_id:$id';
   try {
     final client = new http.Client();
+     print("reviews url $url");
     final streamedRest = await client.send(http.Request('get', Uri.parse(url)));
 
     return streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getData(data)).expand((data) => (data as List)).map((data) {

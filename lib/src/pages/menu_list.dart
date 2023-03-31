@@ -53,7 +53,9 @@ class _MenuWidgetState extends StateMVC<MenuWidget> {
         automaticallyImplyLeading: false,
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back, color: Theme.of(context).hintColor),
-          onPressed: () => Navigator.of(context).pushNamed('/Details', arguments: RouteArgument(id: '0', param: _con.market.id, heroTag: 'menu_tab')),
+          onPressed: () => Navigator.pop(context),
+
+              /*Navigator.of(context).pushNamed('/Details', arguments: RouteArgument(id: '0', param: _con.market.id, heroTag: 'menu_tab')),*/
         ),
         title: Text(
           _con.market?.name ?? '',

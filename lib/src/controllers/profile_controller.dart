@@ -9,6 +9,7 @@ import '../../generated/l10n.dart';
 import '../models/food_model.dart';
 import '../models/order.dart';
 import '../repository/order_repository.dart';
+import '../repository/user_repository.dart';
 
 class ProfileController extends ControllerMVC {
   List<Order> recentOrders = [];
@@ -42,12 +43,20 @@ class ProfileController extends ControllerMVC {
   }
 
   void fetchShowFoods() async {
+    List<Data> items = [];
     Uri uri = Helper.getUri('api/get_sharefood');
     try {
       var response = await http.get(uri);
       if(response.statusCode == 200){
         FoodModel foodModel = FoodModel.fromJson(jsonDecode(response.body));
-        foods = foodModel.data;
+        List<Data> foodItems = foodModel.data;
+        for(Data item in foodItems){
+           if(item.userId == int.parse(currentUser.value.id??"0")){
+            items.add(item);
+           }
+        }
+        print(items.length);
+        foods = items;
         setState(() { });
       }
     } catch (e) {

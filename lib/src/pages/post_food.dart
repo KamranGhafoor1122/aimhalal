@@ -35,6 +35,8 @@ class _PostFoodState extends State<PostFood> {
   TextEditingController _detailsController = TextEditingController();
 
   bool loading = false;
+  String type;
+  bool emptyType= false;
 
   @override
   void initState() {
@@ -221,7 +223,7 @@ class _PostFoodState extends State<PostFood> {
                           height: 8,
                         ),
                         TextFormField(
-                          autofocus: true,
+                          autofocus: false,
                           controller: _titleController,
                           validator: (text){
                             if(text.isEmpty){
@@ -252,60 +254,75 @@ class _PostFoodState extends State<PostFood> {
                         SizedBox(
                           height: 8,
                         ),
-                        TextFormField(
-                          autofocus: true,
-                          controller: _typeController,
-                          validator: (text){
-                            if(text.isEmpty){
-                              return "Type cannot be empty";
-                            }
-                            else{
-                              return null;
-                            }
-                          },
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(12),
-                            hintText: "Type",
-                            hintStyle: Theme.of(context).textTheme.caption.merge(TextStyle(fontSize: 14)),
-                            border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.3))),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+
+                        Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                                color: Theme.of(context).focusColor.withOpacity(0.1),
+                            )
+                          ),
+                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          child: DropdownButton(
+                            value: type,
+                            hint:  Text("Select type",style: Theme.of(context).textTheme.caption.merge(TextStyle(fontSize: 14)),),
+                            items: ["Free","Paid"].map((e) => DropdownMenuItem(
+                               value: e,
+                              child: Text(e,style: Theme.of(context).textTheme.caption.merge(TextStyle(fontSize: 14)),),
+                            )).toList(),
+                            onChanged: (input){
+                              setState(() {
+                                 type = input;
+                                 emptyType = false;
+                              });
+                            },
+                            underline: SizedBox(),
+                            isExpanded:true,
                           ),
                         ),
 
+                        emptyType?Text("Type can not be empty",style: Theme.of(context).textTheme.caption.copyWith(
+                          color: Colors.red
+                        ),):Container(),
 
-                        SizedBox(
-                          height: 28,
-                        ),
 
-                        Text("Price", style: Theme.of(context).textTheme.bodyLarge.copyWith(
-                            fontWeight: FontWeight.w600
-                        ),),
+                        if(type == "Paid")...[
+                          SizedBox(
+                            height: 28,
+                          ),
 
-                        SizedBox(
-                          height: 8,
-                        ),
-                        TextFormField(
-                          autofocus: true,
-                          keyboardType: TextInputType.number,
-                          controller: _priceController,
-                          /*validator: (text){
+                          Text("Price", style: Theme.of(context).textTheme.bodyLarge.copyWith(
+                              fontWeight: FontWeight.w600
+                          ),),
+
+                          SizedBox(
+                            height: 8,
+                          ),
+                          TextFormField(
+                            autofocus: false,
+                            keyboardType: TextInputType.number,
+                            controller: _priceController,
+                            validator: (text){
                             if(text.isEmpty){
                               return "Price cannot be empty";
                             }
                             else{
                               return null;
                             }
-                          },*/
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(12),
-                            hintText: "Price",
-                            hintStyle: Theme.of(context).textTheme.caption.merge(TextStyle(fontSize: 14)),
-                            border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.3))),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                          },
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(12),
+                              hintText: "Price",
+                              hintStyle: Theme.of(context).textTheme.caption.merge(TextStyle(fontSize: 14)),
+                              border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.3))),
+                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                            ),
                           ),
-                        ),
+
+                        ],
+
 
 
                         SizedBox(
@@ -320,7 +337,7 @@ class _PostFoodState extends State<PostFood> {
                           height: 8,
                         ),
                         TextFormField(
-                          autofocus: true,
+                          autofocus: false,
                           controller: _numberController,
                           validator: (text){
                             if(text.isEmpty){
@@ -355,7 +372,7 @@ class _PostFoodState extends State<PostFood> {
                           height: 8,
                         ),
                         TextFormField(
-                          autofocus: true,
+                          autofocus: false,
                           controller: _locationController,
                           validator: (text){
                             if(text.isEmpty){
@@ -389,7 +406,7 @@ class _PostFoodState extends State<PostFood> {
                           height: 8,
                         ),
                         TextFormField(
-                          autofocus: true,
+                          autofocus: false,
                           controller: _detailsController,
                           validator: (text){
                             if(text.isEmpty){
@@ -429,6 +446,17 @@ class _PostFoodState extends State<PostFood> {
 
                               if(formKey.currentState.validate()){
                                 postFoodItem();
+                              }
+                              else{
+                                setState(() {
+                                  if(type == null){
+                                    emptyType = true;
+                                    return;
+                                  }
+                                  else{
+                                    emptyType = false;
+                                  }
+                                });
                               }
 
                             },
@@ -493,6 +521,17 @@ class _PostFoodState extends State<PostFood> {
   }
 
   Future<void> postFoodItem() async {
+
+    setState(() {
+       if(type == null){
+         emptyType = true;
+         return;
+       }
+       else{
+         emptyType = false;
+       }
+    });
+
     Uri uri = Helper.getUri('api/add_sharefood');
     try {
       setState(() {
@@ -502,7 +541,7 @@ class _PostFoodState extends State<PostFood> {
       Map body  = {
         "user_id":currentUser.value.id,
         "title":_titleController.text.trimRight(),
-        "type":_typeController.text.trimRight(),
+        "type":type,
         "price":_priceController.text.trimRight(),
         "contact_number":_numberController.text.trimRight(),
         "location":_locationController.text.trimRight(),

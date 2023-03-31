@@ -11,6 +11,7 @@ import '../elements/PermissionDeniedWidget.dart';
 import '../elements/ProfileAvatarWidget.dart';
 import '../elements/ShoppingCartButtonWidget.dart';
 import '../models/food_model.dart';
+import 'food_details.dart';
 import 'show_foods.dart';
 
 
@@ -159,58 +160,7 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
                           itemCount: _con.foods.length,
                           itemBuilder: (ctx,index) {
                             Data food = _con.foods[index];
-                            return  Stack(
-                              alignment: AlignmentDirectional.topEnd,
-                              children: <Widget>[
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Expanded(
-                                      child: Hero(
-                                        tag:DateTime.now().millisecondsSinceEpoch.toString(),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(image: AssetImage("assets/img/image_ph.jpg"), fit: BoxFit.cover),
-                                            borderRadius: BorderRadius.circular(5),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 5),
-                                    Text(
-                                      food.title,
-                                      style: Theme.of(context).textTheme.bodyText1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    SizedBox(height: 2),
-                                    Text(
-                                      food.price == 0 ?"Free" : food.price.toString(),
-                                      style: Theme.of(context).textTheme.caption,
-                                      overflow: TextOverflow.ellipsis,
-                                    )
-                                  ],
-                                ),
-                                /*Container(
-            margin: EdgeInsets.all(10),
-            width: 40,
-            height: 40,
-            child: MaterialButton(
-              elevation: 0,
-              padding: EdgeInsets.all(0),
-              onPressed: () {
-                widget.onPressed();
-              },
-              child: Icon(
-                Icons.shopping_cart_outlined,
-                color: Theme.of(context).primaryColor,
-                size: 24,
-              ),
-              color: Theme.of(context).accentColor.withOpacity(0.9),
-              shape: StadiumBorder(),
-            ),
-          ),*/
-                              ],
-                            );
+                            return FoodItem(food: food,);
                             /*Container(
                           padding: const EdgeInsets.symmetric(
                               vertical: 12, horizontal: 15),
@@ -361,6 +311,73 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
                 ],
               ),
             ),
+    );
+  }
+}
+
+class FoodItem extends StatelessWidget {
+  Data food;
+   FoodItem({this.food,Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: (){
+         Navigator.push(context, MaterialPageRoute(builder: (ctx)=>FoodDetails(food: food,)));
+      },
+      behavior: HitTestBehavior.translucent,
+      child: Stack(
+        alignment: AlignmentDirectional.topEnd,
+        children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: Hero(
+                  tag:DateTime.now().millisecondsSinceEpoch.toString(),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(image: AssetImage("assets/img/image_ph.jpg"), fit: BoxFit.cover),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
+              Text(
+                food.title,
+                style: Theme.of(context).textTheme.bodyText1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              SizedBox(height: 2),
+              Text(
+                food.price == 0 ?"Free" : food.price.toString(),
+                style: Theme.of(context).textTheme.caption,
+                overflow: TextOverflow.ellipsis,
+              )
+            ],
+          ),
+          /*Container(
+              margin: EdgeInsets.all(10),
+              width: 40,
+              height: 40,
+              child: MaterialButton(
+                elevation: 0,
+                padding: EdgeInsets.all(0),
+                onPressed: () {
+                  widget.onPressed();
+                },
+                child: Icon(
+                  Icons.shopping_cart_outlined,
+                  color: Theme.of(context).primaryColor,
+                  size: 24,
+                ),
+                color: Theme.of(context).accentColor.withOpacity(0.9),
+                shape: StadiumBorder(),
+              ),
+            ),*/
+        ],
+      ),
     );
   }
 }

@@ -220,7 +220,8 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                 case 'trending_week':
                   return ProductsCarouselWidget(productsList: _con.trendingProducts, heroTag: 'home_product_carousel');
                 case 'categories_heading':
-                  return Padding(
+                  return
+                    Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: ListTile(
                       dense: true,
