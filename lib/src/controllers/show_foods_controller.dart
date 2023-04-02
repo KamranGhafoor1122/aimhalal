@@ -15,25 +15,47 @@ class ShowFoodsController extends ControllerMVC {
   List<Data> foodsAll = <Data>[];
   GlobalKey<ScaffoldState> scaffoldKey;
 
-  ShowFoodsController() {
+  ShowFoodsController(String type) {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
-    fetchShowFoods();
+    if(type == "free"){
+      fetchFreeFoods();
+    }
+    else{
+      fetchPaidFoods();
+    }
   }
 
-  void fetchShowFoods() async {
+  void fetchFreeFoods() async {
       Uri uri = Helper.getUri('api/get_sharefood');
       try {
         var response = await http.get(uri);
         if(response.statusCode == 200){
           FoodModel foodModel = FoodModel.fromJson(jsonDecode(response.body));
-          foods = foodModel.data;
-          foodsAll = foodModel.data;
+          foods = foodModel.data.where((element) =>element.type == null || element.type?.toLowerCase() =="free").toList();
+          foodsAll = foods;
           setState(() { });
         }
       } catch (e) {
         print(CustomTrace(StackTrace.current, message: e.toString()).toString());
         return null;
       }
+
+  }
+
+  void fetchPaidFoods() async {
+    Uri uri = Helper.getUri('api/get_sharefood');
+    try {
+      var response = await http.get(uri);
+      if(response.statusCode == 200){
+        FoodModel foodModel = FoodModel.fromJson(jsonDecode(response.body));
+        foods = foodModel.data.where((element) =>element.type != null &&  element.type?.toLowerCase() != "free").toList();
+        foodsAll = foods;
+        setState(() { });
+      }
+    } catch (e) {
+      print(CustomTrace(StackTrace.current, message: e.toString()).toString());
+      return null;
+    }
 
   }
 
@@ -48,8 +70,13 @@ class ShowFoodsController extends ControllerMVC {
      setState(() {});
   }
 
- refreshFoods() async {
+ refreshFreeFoods() async {
     foods.clear();
-    fetchShowFoods();
+    fetchFreeFoods();
+  }
+
+  refreshPaidFoods() async {
+    foods.clear();
+    fetchPaidFoods();
   }
 }

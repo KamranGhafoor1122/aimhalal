@@ -61,10 +61,10 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
         elevation: 0,
         centerTitle: false,
         title: Text(
-          address??S.of(context).home,
+          "AimHalal",
           style: Theme.of(context).textTheme.bodyText1.merge(TextStyle(letterSpacing: 1.3)).copyWith(
             color: Theme.of(context).accentColor,
-            fontSize: 12,
+            fontSize: 16,
             fontWeight: FontWeight.w600
           ),
         ),
@@ -102,7 +102,9 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
               String _homeSection = settingsRepo.setting.value.homeSections.elementAt(index);
               switch (_homeSection) {
                 case 'slider':
-                  return HomeSliderWidget(slides: _con.slides,parentScaffoldKey: widget.parentScaffoldKey,);
+                  return HomeSliderWidget(slides: _con.slides,parentScaffoldKey: widget.parentScaffoldKey,
+                  name: address,
+                  );
                 case 'search':
                   return Container();
                 case 'top_markets':

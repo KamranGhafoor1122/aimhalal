@@ -73,7 +73,7 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                           color: Theme.of(context).hintColor,
                         ),
                         title: Text(
-                          S.of(context).favorite_products,
+                          "Favorites",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.headline4,

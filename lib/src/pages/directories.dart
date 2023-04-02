@@ -15,6 +15,11 @@ import '../elements/ShoppingCartButtonWidget.dart';
 import '../repository/user_repository.dart';
 
 class DirectoryWidget extends StatefulWidget {
+  String name;
+
+
+  DirectoryWidget(this.name);
+
   @override
   _DirectoryWidgetState createState() => _DirectoryWidgetState();
 }
@@ -30,6 +35,7 @@ class _DirectoryWidgetState extends StateMVC<DirectoryWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
     return Scaffold(
       key: _con.scaffoldKey,
       appBar: AppBar(
@@ -43,7 +49,7 @@ class _DirectoryWidgetState extends StateMVC<DirectoryWidget> {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          "Directories",
+          widget.name,
           style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),
         ),
         actions: <Widget>[
@@ -89,9 +95,72 @@ class _DirectoryWidgetState extends StateMVC<DirectoryWidget> {
 
                     _con.directories.isEmpty
                         ? CircularLoadingWidget(height: 500)
-                        : Offstage(
-                            offstage: this.layout != 'grid',
-                            child: ListView.separated(
+                        : DataTable(
+                      columnSpacing: 15,
+                          horizontalMargin: 10,
+                          columns: [
+                            /*DataColumn(label: Container(
+                              width: width * .1,
+                              child: Text(
+                                "Id",
+                                style: Theme.of(context).textTheme.bodyMedium.copyWith(
+                                    fontWeight: FontWeight.w700
+                                ),
+                              ),
+                            )),*/
+                            DataColumn(label: Container(
+                                width: width * .7,
+                                child:  Text(
+                              "Name",
+                              style: Theme.of(context).textTheme.bodyMedium.copyWith(
+                                  fontWeight: FontWeight.w700
+                              ),
+                            ))),
+                            DataColumn(label:
+                            Container(
+                                width: width * .3,
+                                child: Text(
+                              "Type",
+                              style: Theme.of(context).textTheme.bodyMedium.copyWith(
+                                  fontWeight: FontWeight.w700
+                              ),
+                            ))),
+                          ],
+                          border: TableBorder.all(
+                            color: Theme.of(context).hintColor
+                          ),
+
+                          rows:
+                          _con.directories // Loops through dataColumnText, each iteration assigning the value to element
+                              .map(
+                            ((element) => DataRow(
+                              cells: <DataCell>[
+                                // DataCell( Text(
+                                //   element.id?.toString()??"",
+                                //   style: Theme.of(context).textTheme.bodyMedium.copyWith(
+                                //       fontWeight: FontWeight.w700
+                                //   ),
+                                // ),), //Extracting from Map element the value
+                                DataCell(Text(
+                                  element.name??"",
+                                  style: Theme.of(context).textTheme.bodyMedium.copyWith(
+                                      fontWeight: FontWeight.w700
+                                  ),
+                                )),
+                                DataCell(Text(
+                                  element.type??"",
+                                  style: Theme.of(context).textTheme.bodyMedium.copyWith(
+                                      fontWeight: FontWeight.w700
+                                  ),
+                                )),
+                              ],
+                            )),
+                          )
+                              .toList(),
+                        )
+
+
+                           /* ListView.separated(
                               scrollDirection: Axis.vertical,
                               shrinkWrap: true,
                               primary: false,
@@ -129,7 +198,7 @@ class _DirectoryWidgetState extends StateMVC<DirectoryWidget> {
                                       ],
                                     ),
                                   )
-                          ))
+                          ))*/
                   ],
                 ),
               ),

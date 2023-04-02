@@ -4,6 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hijri/hijri_calendar.dart';
+import 'package:intl/intl.dart';
 import 'package:markets/src/elements/SearchBarWidget.dart';
 
 import '../helpers/app_config.dart' as config;
@@ -14,16 +16,20 @@ import 'HomeSliderLoaderWidget.dart';
 
 class HomeSliderWidget extends StatefulWidget {
   final List<Slide> slides;
+  final String name;
   final GlobalKey<ScaffoldState> parentScaffoldKey;
 
   @override
   _HomeSliderWidgetState createState() => _HomeSliderWidgetState();
 
-  HomeSliderWidget({Key key, this.slides,this.parentScaffoldKey}) : super(key: key);
+  HomeSliderWidget({Key key, this.slides,this.parentScaffoldKey,this.name}) : super(key: key);
 }
+
 
 class _HomeSliderWidgetState extends State<HomeSliderWidget> {
   int _current = 0;
+  var _today = HijriCalendar.now();
+  var date = DateTime.now();
   AlignmentDirectional _alignmentDirectional;
 
   @override
@@ -35,6 +41,56 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
             fit: StackFit.passthrough,
             clipBehavior: Clip.none,*/
             children: <Widget>[
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                     Expanded(
+                       child: Text("${widget.name??""}",
+                       maxLines: 1,
+                       overflow: TextOverflow.ellipsis,
+                       style: Theme.of(context).textTheme.headline1.copyWith(
+                         fontSize: 14,
+                           fontWeight: FontWeight.w500,
+                           color: Theme.of(context).accentColor
+                       ),
+                       ),
+                     ),
+                    Expanded(
+                      flex: 2,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            
+                            Text("${_today.toFormat("dd MMMM,yyyy")} | ",
+                              style: Theme.of(context).textTheme.headline1.copyWith(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: Theme.of(context).accentColor
+                              ),
+                            ),
+                            Text("${DateFormat("dd MMM,yyyy").format(date)}",
+                              style: Theme.of(context).textTheme.headline1.copyWith(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: Theme.of(context).accentColor
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+
               SizedBox(
                 height: 180,
                 width: double.infinity,

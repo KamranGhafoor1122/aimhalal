@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:markets/src/pages/events_details.dart';
 
 import '../models/event_model.dart';
 import '../models/favorite.dart';
@@ -12,12 +13,11 @@ class EventGridItemWidget extends StatelessWidget {
   EventGridItemWidget({Key key, this.heroTag, this.event}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    print("img: ${event.image}");
     return InkWell(
       highlightColor: Colors.transparent,
       splashColor: Theme.of(context).accentColor.withOpacity(0.08),
       onTap: () {
-        //Navigator.of(context).pushNamed('/Product', arguments: new RouteArgument(heroTag: this.heroTag, id: this.favorite.product.id));
+        Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=>EventsDetails(event: event,)));
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,27 +25,31 @@ class EventGridItemWidget extends StatelessWidget {
           Hero(
             tag: heroTag + "${event.id}",
             child: Container(
-              height: 100,
-              width: 100,
-              child: CachedNetworkImage(
-                 imageUrl: event.image,
-                placeholder:(ctx,_)=> Container(
+              height: 160,
+              width: double.infinity,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: CachedNetworkImage(
+                   imageUrl: event.image,
+                  fit: BoxFit.fill,
+                  placeholder:(ctx,_)=> Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Icon(Icons.image,size: 80,),
+                  ),
+                  errorWidget:(ctx,_,dynamic)=> Container(
                     decoration: BoxDecoration(
                       color: Colors.grey,
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Icon(Icons.image,size: 80,),
-                ),
-                errorWidget:(ctx,_,dynamic)=> Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(15),
                   ),
-                  child: Icon(Icons.image,size: 80,),
-                ),
-                ),
+                  ),
+              ),
             ),
             ),
           SizedBox(height: 5),

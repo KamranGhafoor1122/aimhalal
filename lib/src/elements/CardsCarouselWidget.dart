@@ -8,8 +8,9 @@ import '../models/market.dart' as M;
 import '../models/route_argument.dart';
 import '../pages/category_details.dart';
 import '../pages/directories.dart';
+import '../pages/food_share.dart';
 import '../pages/my_webview.dart';
-import '../pages/show_foods.dart';
+import '../pages/home_chefs.dart';
 import 'CardWidget.dart';
 
 // ignore: must_be_immutable
@@ -41,91 +42,12 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-              widget.hideCategories ? Container():  widget.homeCategories == null ? Center(
-                  child: CircularProgressIndicator(),
-                ):
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,
-                  crossAxisSpacing: 4,
-                    mainAxisSpacing: 3,
-                    childAspectRatio: 0.80
-                  ),
-                      itemCount: widget.homeCategories.data.length,
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (ctx,index){
-                         return GestureDetector(
-                           behavior: HitTestBehavior.translucent,
-                           onTap: (){
-                              if(widget.homeCategories.data[index].name == "Quran Learning"){
-                                print("cat: ${widget.homeCategories.data[index].url}");
-                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>MyWebview(title: "Quran Learning", url: widget.homeCategories.data[index].url)));
-                              }
-                              else if(widget.homeCategories.data[index].name.contains("Events")){
-                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>EventsWidget()));
-                              }
-                              else if(widget.homeCategories.data[index].name == "Halal Directory"){
-                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>DirectoryWidget()));
-                              }
-                              else if(widget.homeCategories.data[index].name == "Home Chefs"){
-                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>ShowFoods()));
-                              }
-                              else{
-                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>CategoryDetails(markets: widget.homeCategories.data[index].markets,)));
-                              }
-                              },
-                           child: Column(
-                             crossAxisAlignment: CrossAxisAlignment.center,
-                             children: [
-                               SizedBox(
-                                 height: 5,
-                               ),
-
-                               SizedBox(
-                                 height: 60,
-                                 width: 60,
-                                 child: Image.network(widget.homeCategories.data[index].image,
-                                 ),
-                               ),
-                               SizedBox(
-                                 height: 5,
-                               ),
-                               Text(
-                                 widget.homeCategories.data[index].name.replaceFirst(" ", "\n"),
-                               textAlign: TextAlign.center,
-                               //  overflow: TextOverflow.ellipsis,
-                                 style: Theme.of(context).textTheme.bodySmall.copyWith(
-                                   fontWeight: FontWeight.w500,
-                                   color: Theme.of(context).brightness == Brightness.dark ? Colors.white: Colors.black
-                                 )
-                               ),
 
 
-
-                             ],
-                           ),
-                         );
-
-                           /*Container(
-                           decoration: BoxDecoration(
-                             shape: BoxShape.circle,
-                             color: Theme.of(context).accentColor,
-                           ),
-                           padding: EdgeInsets.all(20),
-                           child:
-                         );*/
-                      }),
-                ),
-
-
-                SizedBox(
-                  height: 5,
-                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Text(
-                    S.of(context).top_markets,
+                    "Featured",
                     style: Theme.of(context).textTheme.headline4,
                     maxLines: 1,
                     softWrap: false,
@@ -156,6 +78,95 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
                     },
                   ),
                 ),
+                SizedBox(
+                  height: 5,
+                ),
+
+
+                widget.hideCategories ? Container():  widget.homeCategories == null ? Center(
+                  child: CircularProgressIndicator(),
+                ):
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,
+                      crossAxisSpacing: 4,
+                      mainAxisSpacing: 3,
+                      childAspectRatio: 0.80
+                  ),
+                      itemCount: widget.homeCategories.data.length,
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (ctx,index){
+                        return GestureDetector(
+                          behavior: HitTestBehavior.translucent,
+                          onTap: (){
+                            print("cat: ${widget.homeCategories.data[index].id}");
+                            if(widget.homeCategories.data[index].name == "Quran Learning"){
+                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>MyWebview(title: "Quran Learning", url: widget.homeCategories.data[index].url)));
+                            }
+                            else if(widget.homeCategories.data[index].name.contains("Events")){
+                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>EventsWidget()));
+                            }
+                            else if(widget.homeCategories.data[index].id == 11){
+                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>DirectoryWidget(widget.homeCategories.data[index].name)));
+                            }
+                            else if(widget.homeCategories.data[index].id == 16){
+                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>HomeChefs(widget.homeCategories.data[index].name)));
+                            }
+                            else if(widget.homeCategories.data[index].id == 17){
+                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>FoodShare(widget.homeCategories.data[index].name)));
+                            }
+                            else{
+                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>CategoryDetails(markets: widget.homeCategories.data[index].markets,
+                                name: widget.homeCategories.data[index].name,
+                              )));
+                            }
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 5,
+                              ),
+
+                              SizedBox(
+                                height: 60,
+                                width: 60,
+                                child: Image.network(widget.homeCategories.data[index].image,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                  widget.homeCategories.data[index].name.replaceFirst(" ", "\n"),
+                                  textAlign: TextAlign.center,
+                                  //  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context).textTheme.bodySmall.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: Theme.of(context).brightness == Brightness.dark ? Colors.white: Colors.black
+                                  )
+                              ),
+
+
+
+                            ],
+                          ),
+                        );
+
+                        /*Container(
+                           decoration: BoxDecoration(
+                             shape: BoxShape.circle,
+                             color: Theme.of(context).accentColor,
+                           ),
+                           padding: EdgeInsets.all(20),
+                           child:
+                         );*/
+                      }),
+                ),
+
+
+
               ],
             ),
           );

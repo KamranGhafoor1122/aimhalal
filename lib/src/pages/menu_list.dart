@@ -87,7 +87,7 @@ class _MenuWidgetState extends StateMVC<MenuWidget> {
                 color: Theme.of(context).hintColor,
               ),
               title: Text(
-                S.of(context).featured_products,
+                "Featured",
                 style: Theme.of(context).textTheme.headline4,
               ),
               subtitle: Text(

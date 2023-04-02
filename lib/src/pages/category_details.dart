@@ -14,7 +14,8 @@ ValueNotifier<Setting> setting = new ValueNotifier(new Setting());
 
 class CategoryDetails extends StatefulWidget {
   List<Market> markets;
-  CategoryDetails({Key key,this.markets}) : super(key: key);
+  String name;
+  CategoryDetails({Key key,this.markets,this.name}) : super(key: key);
 
   @override
   State<CategoryDetails> createState() => _CategoryDetailsState();
@@ -34,7 +35,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          S.of(context).details,
+          widget.name,
           style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),
         ),
         actions: <Widget>[
@@ -49,19 +50,15 @@ class _CategoryDetailsState extends State<CategoryDetails> {
           ),
           child:
           widget.markets == null ? Center(
-            child: Text("No markets found",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-              color: Colors.black
+            child: Text("Coming Soon",
+            style: Theme.of(context).textTheme.headline6.copyWith(
+              fontSize: 26,
             ),
             ),
           ): widget.markets.isEmpty ? Center(
-            child: Text("No markets found",
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black
+            child: Text("Coming Soon",
+              style: Theme.of(context).textTheme.headline6.copyWith(
+                fontSize: 26,
               ),
             ),
           ):
