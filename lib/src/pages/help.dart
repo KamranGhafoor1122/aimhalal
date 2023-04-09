@@ -46,7 +46,7 @@ class _HelpWidgetState extends StateMVC<HelpWidget> {
                   style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3, color: Theme.of(context).primaryColor)),
                 ),
                 actions: <Widget>[
-                  new ShoppingCartButtonWidget(iconColor: Theme.of(context).primaryColor, labelColor: Theme.of(context).accentColor),
+                 // new ShoppingCartButtonWidget(iconColor: Theme.of(context).primaryColor, labelColor: Theme.of(context).accentColor),
                 ],
               ),
               body: RefreshIndicator(

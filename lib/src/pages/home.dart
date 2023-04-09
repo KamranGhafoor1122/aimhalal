@@ -4,6 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as Loc;
+import 'package:markets/src/pages/category_details.dart';
+import 'package:markets/src/pages/directories.dart';
+import 'package:markets/src/pages/evevnts.dart';
+import 'package:markets/src/pages/food_share.dart';
+import 'package:markets/src/pages/home_chefs.dart';
+import 'package:markets/src/pages/my_webview.dart';
 import 'package:markets/src/repository/settings_repository.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../generated/l10n.dart';
@@ -106,9 +112,100 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                   name: address,
                   );
                 case 'search':
-                  return Container();
+                  return  _con.homeCategories1 == null ? Center(
+                    child: CircularProgressIndicator(),
+                  ):Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,
+                        childAspectRatio: 0.72
+                    ),
+                        itemCount: _con.homeCategories1.length,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (ctx,index){
+                          return GestureDetector(
+                            behavior: HitTestBehavior.translucent,
+                            onTap: (){
+                              if(_con.homeCategories1[index].name == "Quran Learning"){
+                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>MyWebview(title: "Quran Learning", url: _con.homeCategories1[index].url)));
+                              }
+                              else if(_con.homeCategories1[index].name.contains("Events")){
+                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>EventsWidget()));
+                              }
+                              else if(_con.homeCategories1[index].id == 11){
+                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>DirectoryWidget(_con.homeCategories1[index].name)));
+                              }
+                              else if(_con.homeCategories1[index].id == 16){
+                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>HomeChefs(_con.homeCategories1[index].name)));
+                              }
+                              else if(_con.homeCategories1[index].id == 17){
+                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>FoodShare(_con.homeCategories1[index].name)));
+                              }
+                              else{
+                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>CategoryDetails(markets: _con.homeCategories1[index].markets,
+                                  name: _con.homeCategories1[index].name,
+                                )));
+                              }
+                            },
+                            child: Container(
+                              /*decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.blue,
+                                  Colors.deepPurple
+                                ],
+                              ),
+                            )*/
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+
+                                  SizedBox(
+                                    height: 75,
+                                    width: 98,
+                                    child: Image.network(_con.homeCategories1[index].image,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                      _con.homeCategories1[index].name.replaceFirst(" ", "\n"),
+                                      textAlign: TextAlign.center,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: Theme.of(context).textTheme.bodySmall.copyWith(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 13,
+                                          color: Theme.of(context).brightness == Brightness.dark ? Colors.white: Colors.black
+                                      )
+                                  ),
+
+
+
+                                ],
+                              ),
+                            ),
+                          );
+
+                          /*Container(
+                           decoration: BoxDecoration(
+                             shape: BoxShape.circle,
+                             color: Theme.of(context).accentColor,
+                           ),
+                           padding: EdgeInsets.all(20),
+                           child:
+                         );*/
+                        }),
+                  );
                 case 'top_markets':
-                  return CardsCarouselWidget(marketsList: _con.topMarkets, heroTag: 'home_top_markets',homeCategories: _con.homeCategories,);
+                  return CardsCarouselWidget(marketsList: _con.topMarkets, heroTag: 'home_top_markets',homeCategories: _con.homeCategories2,);
                 case 'top_markets_heading':
                   return Padding(
                     padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 10),

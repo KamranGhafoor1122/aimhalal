@@ -45,7 +45,7 @@ class ProfileController extends ControllerMVC {
   void fetchShowFoods() async {
     List<Data> items = [];
     Uri uri = Helper.getUri('api/get_sharefood');
-    try {
+    // try {
       var response = await http.get(uri);
       if(response.statusCode == 200){
         FoodModel foodModel = FoodModel.fromJson(jsonDecode(response.body));
@@ -59,10 +59,10 @@ class ProfileController extends ControllerMVC {
         foods = items;
         setState(() { });
       }
-    } catch (e) {
+    /*} catch (e) {
       print(CustomTrace(StackTrace.current, message: e.toString()).toString());
       return null;
-    }
+    }*/
   }
 
 

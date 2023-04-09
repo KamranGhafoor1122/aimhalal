@@ -22,7 +22,7 @@ class DirectoryController extends ControllerMVC {
 
   void fetchDirectories() async {
       Uri uri = Helper.getUri('api/get_directories');
-      try {
+     // try {
         var response = await http.get(uri);
         if(response.statusCode == 200){
           DirectoryModel directoryModel = DirectoryModel.fromJson(jsonDecode(response.body));
@@ -30,10 +30,10 @@ class DirectoryController extends ControllerMVC {
           directoriesAll = directoryModel.data;
           setState(() { });
         }
-      } catch (e) {
+      /*} catch (e) {
         print(CustomTrace(StackTrace.current, message: e.toString()).toString());
         return null;
-      }
+      }*/
 
   }
 

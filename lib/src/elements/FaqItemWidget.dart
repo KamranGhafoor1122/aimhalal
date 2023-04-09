@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../helpers/helper.dart';
 import '../models/faq.dart';
@@ -9,6 +10,7 @@ class FaqItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("faq : ${faq.answer}");
     return DecoratedBox(
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
@@ -35,13 +37,39 @@ class FaqItemWidget extends StatelessWidget {
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor, borderRadius: BorderRadius.only(bottomRight: Radius.circular(5), bottomLeft: Radius.circular(5))),
-            child: Text(
-              Helper.skipHtml(this.faq.answer),
-              style: Theme.of(context).textTheme.bodyText2,
+            child: GestureDetector(
+              onTap: () async {
+
+                final Uri params = Uri(
+                  scheme: 'mailto',
+                  path: 'connect@aimhalal.com',
+                );
+
+                var url = params.toString();
+                if (await canLaunch(url)) {
+                await launch(url);
+                } else {
+                throw 'Could not launch $url';
+                }
+              },
+              behavior: HitTestBehavior.translucent,
+              child: Text(
+                Helper.skipHtml(this.faq.answer),
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
             ),
           ),
         ],
       ),
     );
+  }
+
+
+  Future<void> _openUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

@@ -25,10 +25,10 @@ class DirectoryModel {
 }
 
 class Data {
-  int id;
+  dynamic id;
   String name;
   String type;
-  Null qrcode;
+  String qrcode;
   String createdAt;
   String updatedAt;
 

@@ -95,11 +95,12 @@ class _DirectoryWidgetState extends StateMVC<DirectoryWidget> {
 
                     _con.directories.isEmpty
                         ? CircularLoadingWidget(height: 500)
-                        : DataTable(
+                        :
+                    /*DataTable(
                       columnSpacing: 15,
                           horizontalMargin: 10,
                           columns: [
-                            /*DataColumn(label: Container(
+                            *//*DataColumn(label: Container(
                               width: width * .1,
                               child: Text(
                                 "Id",
@@ -107,7 +108,7 @@ class _DirectoryWidgetState extends StateMVC<DirectoryWidget> {
                                     fontWeight: FontWeight.w700
                                 ),
                               ),
-                            )),*/
+                            )),*//*
                             DataColumn(label: Container(
                                 width: width * .7,
                                 child:  Text(
@@ -157,10 +158,10 @@ class _DirectoryWidgetState extends StateMVC<DirectoryWidget> {
                             )),
                           )
                               .toList(),
-                        )
+                        )*/
 
 
-                           /* ListView.separated(
+                            ListView.separated(
                               scrollDirection: Axis.vertical,
                               shrinkWrap: true,
                               primary: false,
@@ -183,7 +184,7 @@ class _DirectoryWidgetState extends StateMVC<DirectoryWidget> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          _con.directories[index].type??"",
+                                          _con.directories[index].name??"",
                                           style: Theme.of(context).textTheme.bodyMedium.copyWith(
                                             fontWeight: FontWeight.w700
                                           ),
@@ -192,13 +193,13 @@ class _DirectoryWidgetState extends StateMVC<DirectoryWidget> {
                                           height: 6,
                                         ),
                                         Text(
-                                          _con.directories[index].name??"",
+                                          _con.directories[index].type??"",
                                           style: Theme.of(context).textTheme.bodySmall,
                                         ),
                                       ],
                                     ),
                                   )
-                          ))*/
+                          )
                   ],
                 ),
               ),

@@ -16,7 +16,7 @@ import 'CardWidget.dart';
 // ignore: must_be_immutable
 class CardsCarouselWidget extends StatefulWidget {
   List<M.Market> marketsList;
-  HomeCategories homeCategories;
+  List<Datum> homeCategories;
   bool hideCategories;
   String heroTag;
 
@@ -87,70 +87,83 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
                   child: CircularProgressIndicator(),
                 ):
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,
-                      crossAxisSpacing: 4,
-                      mainAxisSpacing: 3,
-                      childAspectRatio: 0.80
+                      childAspectRatio: 0.72
                   ),
-                      itemCount: widget.homeCategories.data.length,
+                      itemCount: widget.homeCategories.length,
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (ctx,index){
                         return GestureDetector(
                           behavior: HitTestBehavior.translucent,
                           onTap: (){
-                            print("cat: ${widget.homeCategories.data[index].id}");
-                            if(widget.homeCategories.data[index].name == "Quran Learning"){
-                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>MyWebview(title: "Quran Learning", url: widget.homeCategories.data[index].url)));
+                            print("cat: ${widget.homeCategories[index].id}");
+                            if(widget.homeCategories[index].name == "Quran Learning"){
+                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>MyWebview(title: "Quran Learning", url: widget.homeCategories[index].url)));
                             }
-                            else if(widget.homeCategories.data[index].name.contains("Events")){
+                            else if(widget.homeCategories[index].name.contains("Events")){
                               Navigator.push(context, MaterialPageRoute(builder: (ctx)=>EventsWidget()));
                             }
-                            else if(widget.homeCategories.data[index].id == 11){
-                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>DirectoryWidget(widget.homeCategories.data[index].name)));
+                            else if(widget.homeCategories[index].id == 11){
+                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>DirectoryWidget(widget.homeCategories[index].name)));
                             }
-                            else if(widget.homeCategories.data[index].id == 16){
-                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>HomeChefs(widget.homeCategories.data[index].name)));
+                            else if(widget.homeCategories[index].id == 16){
+                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>HomeChefs(widget.homeCategories[index].name)));
                             }
-                            else if(widget.homeCategories.data[index].id == 17){
-                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>FoodShare(widget.homeCategories.data[index].name)));
+                            else if(widget.homeCategories[index].id == 17){
+                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>FoodShare(widget.homeCategories[index].name)));
                             }
                             else{
-                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>CategoryDetails(markets: widget.homeCategories.data[index].markets,
-                                name: widget.homeCategories.data[index].name,
+                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>CategoryDetails(markets: widget.homeCategories[index].markets,
+                                name: widget.homeCategories[index].name,
                               )));
                             }
                           },
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 5,
+                          child: Container(
+                            /*decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.blue,
+                                  Colors.deepPurple
+                                ],
                               ),
-
-                              SizedBox(
-                                height: 60,
-                                width: 60,
-                                child: Image.network(widget.homeCategories.data[index].image,
+                            )*/
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 5,
                                 ),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                  widget.homeCategories.data[index].name.replaceFirst(" ", "\n"),
-                                  textAlign: TextAlign.center,
-                                  //  overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context).textTheme.bodySmall.copyWith(
-                                      fontWeight: FontWeight.w500,
-                                      color: Theme.of(context).brightness == Brightness.dark ? Colors.white: Colors.black
-                                  )
-                              ),
+
+                                SizedBox(
+                                  height: 75,
+                                  width: 98,
+                                  child: Image.network(widget.homeCategories[index].image,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                    widget.homeCategories[index].name.replaceFirst(" ", "\n"),
+                                    textAlign: TextAlign.center,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    style: Theme.of(context).textTheme.bodySmall.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 13,
+                                        color: Theme.of(context).brightness == Brightness.dark ? Colors.white: Colors.black
+                                    )
+                                ),
 
 
 
-                            ],
+                              ],
+                            ),
                           ),
                         );
 

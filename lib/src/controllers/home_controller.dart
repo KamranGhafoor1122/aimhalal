@@ -21,7 +21,9 @@ class HomeController extends ControllerMVC {
   List<M.Market> popularMarkets = <M.Market>[];
   List<Review> recentReviews = <Review>[];
   List<Product> trendingProducts = <Product>[];
-  HomeCategories homeCategories;
+  List<Datum> homeCategories2;
+  List<Datum> homeCategories1;
+
   HomeController() {
     listenForTopMarkets();
     listenForSlides();
@@ -81,7 +83,16 @@ class HomeController extends ControllerMVC {
   }
 
   Future<void> listenForHomeCategories() async {
-   homeCategories = await getHomeCategories();
+   HomeCategories categories = await getHomeCategories();
+
+   for(Datum datum in categories.data){
+     if(datum.id == 7 || datum.id == 10 || datum.id == 11 || datum.id == 12){
+       homeCategories1.add(datum);
+     }
+     else{
+       homeCategories2.add(datum);
+     }
+   }
    setState(() { });
   }
 

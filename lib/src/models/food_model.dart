@@ -25,7 +25,7 @@ class FoodModel {
 }
 
 class Data {
-  int id;
+  dynamic id;
   int userId;
   String title;
   String type;
