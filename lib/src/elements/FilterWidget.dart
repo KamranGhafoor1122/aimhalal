@@ -114,7 +114,16 @@ class _FilterWidgetState extends StateMVC<FilterWidget> {
                       : ExpansionTile(
                           title: Text(S.of(context).fields),
                           children: List.generate(_con.fields.length, (index) {
-                            return CheckboxListTile(
+                            print("name: ${_con.fields.elementAt(index).name} id: ${_con.fields.elementAt(index).id}");
+                            return
+                              (_con.fields.elementAt(index).id == "7" ||
+                                  _con.fields.elementAt(index).id == "16" ||
+                                  _con.fields.elementAt(index).id == "10" ||
+                                  _con.fields.elementAt(index).id == "12" ||
+                                  _con.fields.elementAt(index).id == "0" ||
+                                  _con.fields.elementAt(index).id == "8")
+                              ?
+                              CheckboxListTile(
                               controlAffinity: ListTileControlAffinity.trailing,
                               value: _con.fields.elementAt(index).selected,
                               onChanged: (value) {
@@ -126,7 +135,7 @@ class _FilterWidgetState extends StateMVC<FilterWidget> {
                                 softWrap: false,
                                 maxLines: 1,
                               ),
-                            );
+                            ):Container();
                           }),
                           initiallyExpanded: true,
                         ),

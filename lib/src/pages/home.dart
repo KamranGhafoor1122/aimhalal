@@ -62,17 +62,32 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
           icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
           onPressed: () => widget.parentScaffoldKey.currentState.openDrawer(),
         ),
+        leadingWidth: 20,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: false,
-        title: Text(
-          "AimHalal",
-          style: Theme.of(context).textTheme.bodyText1.merge(TextStyle(letterSpacing: 1.3)).copyWith(
-            color: Theme.of(context).accentColor,
-            fontSize: 16,
-            fontWeight: FontWeight.w600
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+
+            Image.asset("assets/img/aimhalal_512.png",
+            fit: BoxFit.cover,
+              height: 28,
+              width: 28,
+            ),
+            SizedBox(width: 7,),
+
+            Text(
+              "AimHalal",
+              style: Theme.of(context).textTheme.bodyText1.merge(TextStyle(letterSpacing: 1.3)).copyWith(
+                color: Theme.of(context).accentColor,
+                fontSize: 16,
+                fontWeight: FontWeight.w600
+              ),
+            ),
+
+          ],
         ),
 
        /* ValueListenableBuilder(
@@ -109,106 +124,16 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
               switch (_homeSection) {
                 case 'slider':
                   return HomeSliderWidget(slides: _con.slides,parentScaffoldKey: widget.parentScaffoldKey,
+                  categories: _con.homeCategories1,
                   name: address,
                   );
                 case 'search':
-                  return  _con.homeCategories1 == null ? Center(
-                    child: CircularProgressIndicator(),
-                  ):Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,
-                        childAspectRatio: 0.72
-                    ),
-                        itemCount: _con.homeCategories1.length,
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (ctx,index){
-                          return GestureDetector(
-                            behavior: HitTestBehavior.translucent,
-                            onTap: (){
-                              if(_con.homeCategories1[index].name == "Quran Learning"){
-                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>MyWebview(title: "Quran Learning", url: _con.homeCategories1[index].url)));
-                              }
-                              else if(_con.homeCategories1[index].name.contains("Events")){
-                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>EventsWidget()));
-                              }
-                              else if(_con.homeCategories1[index].id == 11){
-                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>DirectoryWidget(_con.homeCategories1[index].name)));
-                              }
-                              else if(_con.homeCategories1[index].id == 16){
-                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>HomeChefs(_con.homeCategories1[index].name)));
-                              }
-                              else if(_con.homeCategories1[index].id == 17){
-                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>FoodShare(_con.homeCategories1[index].name)));
-                              }
-                              else{
-                                Navigator.push(context, MaterialPageRoute(builder: (ctx)=>CategoryDetails(markets: _con.homeCategories1[index].markets,
-                                  name: _con.homeCategories1[index].name,
-                                )));
-                              }
-                            },
-                            child: Container(
-                              /*decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(7.0)),
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  Colors.blue,
-                                  Colors.deepPurple
-                                ],
-                              ),
-                            )*/
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-
-                                  SizedBox(
-                                    height: 75,
-                                    width: 98,
-                                    child: Image.network(_con.homeCategories1[index].image,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                      _con.homeCategories1[index].name.replaceFirst(" ", "\n"),
-                                      textAlign: TextAlign.center,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: Theme.of(context).textTheme.bodySmall.copyWith(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 13,
-                                          color: Theme.of(context).brightness == Brightness.dark ? Colors.white: Colors.black
-                                      )
-                                  ),
-
-
-
-                                ],
-                              ),
-                            ),
-                          );
-
-                          /*Container(
-                           decoration: BoxDecoration(
-                             shape: BoxShape.circle,
-                             color: Theme.of(context).accentColor,
-                           ),
-                           padding: EdgeInsets.all(20),
-                           child:
-                         );*/
-                        }),
-                  );
+                  return Container();
                 case 'top_markets':
                   return CardsCarouselWidget(marketsList: _con.topMarkets, heroTag: 'home_top_markets',homeCategories: _con.homeCategories2,);
                 case 'top_markets_heading':
                   return Padding(
-                    padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 10),
+                    padding: const EdgeInsets.only(top: 1, left: 20, right: 5, bottom: 5),
                     child: Container()
                   );
 

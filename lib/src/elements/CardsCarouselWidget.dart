@@ -83,7 +83,7 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
                 ),
 
 
-                widget.hideCategories ? Container():  widget.homeCategories == null ? Center(
+                widget.hideCategories ? Container():  widget.homeCategories == null || widget.homeCategories.isEmpty ? Center(
                   child: CircularProgressIndicator(),
                 ):
                 Padding(

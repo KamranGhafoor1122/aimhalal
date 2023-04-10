@@ -51,6 +51,20 @@ class _LoginWidgetState extends StateMVC<LoginWidget> {
                 decoration: BoxDecoration(color: Theme.of(context).accentColor),
               ),
             ),
+
+            Positioned(
+              top: 20,
+              left: 10,
+              child: Container(
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back_outlined,color: Colors.white,),
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+            ),
+
             Positioned(
               top: config.App(context).appHeight(37) - 120,
               child: Container(

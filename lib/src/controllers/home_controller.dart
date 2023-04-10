@@ -21,8 +21,8 @@ class HomeController extends ControllerMVC {
   List<M.Market> popularMarkets = <M.Market>[];
   List<Review> recentReviews = <Review>[];
   List<Product> trendingProducts = <Product>[];
-  List<Datum> homeCategories2;
-  List<Datum> homeCategories1;
+  List<Datum> homeCategories2=[];
+  List<Datum> homeCategories1=[];
 
   HomeController() {
     listenForTopMarkets();
