@@ -9,6 +9,7 @@ import '../models/route_argument.dart';
 import '../pages/category_details.dart';
 import '../pages/directories.dart';
 import '../pages/food_share.dart';
+import '../pages/marketplace.dart';
 import '../pages/my_webview.dart';
 import '../pages/home_chefs.dart';
 import 'CardWidget.dart';
@@ -99,11 +100,15 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
                           behavior: HitTestBehavior.translucent,
                           onTap: (){
                             print("cat: ${widget.homeCategories[index].id}");
+
                             if(widget.homeCategories[index].name == "Quran Learning"){
                               Navigator.push(context, MaterialPageRoute(builder: (ctx)=>MyWebview(title: "Quran Learning", url: widget.homeCategories[index].url)));
                             }
                             else if(widget.homeCategories[index].name.contains("Events")){
                               Navigator.push(context, MaterialPageRoute(builder: (ctx)=>EventsWidget()));
+                            }
+                            else if(widget.homeCategories[index].id == 8){
+                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>MarketPlace(widget.homeCategories[index].name)));
                             }
                             else if(widget.homeCategories[index].id == 11){
                               Navigator.push(context, MaterialPageRoute(builder: (ctx)=>DirectoryWidget(widget.homeCategories[index].name)));

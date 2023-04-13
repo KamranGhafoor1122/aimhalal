@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../generated/l10n.dart';
 import '../helpers/helper.dart';
@@ -130,7 +131,11 @@ class CardWidget extends StatelessWidget {
                         highlightElevation: 0,
                         padding: EdgeInsets.all(0),
                         onPressed: () {
-                          Navigator.of(context).pushNamed('/Pages', arguments: new RouteArgument(id: '1', param: market));
+                          double lat = double.parse(market.latitude??"0.0");
+                          double lng = double.parse(market.longitude??"0.0");
+                          openMap(lat, lng);
+
+                         // Navigator.of(context).pushNamed('/Pages', arguments: new RouteArgument(id: '1', param: market));
                         },
                         child: Icon(Icons.directions_outlined, color: Theme.of(context).primaryColor),
                         color: Theme.of(context).accentColor,
@@ -153,5 +158,14 @@ class CardWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+   Future<void> openMap(double latitude, double longitude) async {
+    String googleUrl = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+    if (await canLaunch(googleUrl)) {
+      await launch(googleUrl);
+    } else {
+      throw 'Could not open the map.';
+    }
   }
 }
