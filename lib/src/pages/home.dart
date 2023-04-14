@@ -62,7 +62,6 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
           icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
           onPressed: () => widget.parentScaffoldKey.currentState.openDrawer(),
         ),
-        leadingWidth: 20,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -71,21 +70,20 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
 
-            Image.asset("assets/img/aimhalal_512.png",
+            Image.asset("assets/img/AimHalal.png",
             fit: BoxFit.cover,
-              height: 28,
-              width: 28,
+              height: 75,
             ),
             SizedBox(width: 7,),
 
-            Text(
+           /* Text(
               "AimHalal",
               style: Theme.of(context).textTheme.bodyText1.merge(TextStyle(letterSpacing: 1.3)).copyWith(
                 color: Theme.of(context).accentColor,
                 fontSize: 16,
                 fontWeight: FontWeight.w600
               ),
-            ),
+            ),*/
 
           ],
         ),

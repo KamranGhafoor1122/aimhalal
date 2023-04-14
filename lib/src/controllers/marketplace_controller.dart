@@ -25,6 +25,7 @@ class MarketplaceController extends ControllerMVC {
     Uri uri = Helper.getUri('api/get_halal_market_place_categories');
     try {
       var response = await http.get(uri);
+      print("cat get: ${response.body}");
       if(response.statusCode == 200){
         MC.MarketplaceCategory eventModel = MC.MarketplaceCategory.fromJson(jsonDecode(response.body));
         marketPlaceCategories = eventModel.data;
@@ -38,9 +39,12 @@ class MarketplaceController extends ControllerMVC {
   }
 
   void fetchMarketplaceItems({@required int category_id}) async {
-      Uri uri = Helper.getUri('api/get_halal_items?category=$category_id');
+      Uri uri = Helper.getUri('https://admin.aimhalal.com/public/api/get_halal_items?category=3');
       try {
+        print("uri : ${uri.path}");
         var response = await http.get(uri);
+        print("res :${response.statusCode} ${response.body}");
+
         if(response.statusCode == 200){
           MarketPlace eventModel = MarketPlace.fromJson(jsonDecode(response.body));
           marketPlaceItems = eventModel.data;

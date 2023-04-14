@@ -26,7 +26,7 @@ class FoodModel {
 
 class Data {
   dynamic id;
-  int userId;
+  dynamic userId;
   String title;
   String type;
   int price;

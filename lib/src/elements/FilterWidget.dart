@@ -117,11 +117,9 @@ class _FilterWidgetState extends StateMVC<FilterWidget> {
                             print("name: ${_con.fields.elementAt(index).name} id: ${_con.fields.elementAt(index).id}");
                             return
                               (_con.fields.elementAt(index).id == "7" ||
-                                  _con.fields.elementAt(index).id == "16" ||
                                   _con.fields.elementAt(index).id == "10" ||
                                   _con.fields.elementAt(index).id == "12" ||
-                                  _con.fields.elementAt(index).id == "0" ||
-                                  _con.fields.elementAt(index).id == "8")
+                                  _con.fields.elementAt(index).id == "0" )
                               ?
                               CheckboxListTile(
                               controlAffinity: ListTileControlAffinity.trailing,
