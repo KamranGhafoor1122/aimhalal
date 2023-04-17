@@ -251,7 +251,7 @@ class _LoginWidgetState extends StateMVC<LoginWidget> {
                     elevation: 0,
                     onPressed: () {
                       Navigator.of(context)
-                          .pushReplacementNamed('/ForgetPassword');
+                          .pushNamed('/ForgetPassword');
                     },
                     textColor: Theme.of(context).hintColor,
                     child: Text(S.of(context).i_forgot_password),
@@ -259,7 +259,7 @@ class _LoginWidgetState extends StateMVC<LoginWidget> {
                   MaterialButton(
                     elevation: 0,
                     onPressed: () {
-                      Navigator.of(context).pushReplacementNamed('/SignUp');
+                      Navigator.of(context).pushNamed('/SignUp');
                     },
                     textColor: Theme.of(context).hintColor,
                     child: Text(S.of(context).i_dont_have_an_account),

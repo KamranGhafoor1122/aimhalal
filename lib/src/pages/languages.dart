@@ -27,6 +27,11 @@ class _LanguagesWidgetState extends State<LanguagesWidget> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
+        leading: new IconButton(
+          icon:
+          new Icon(Icons.arrow_back_ios, color: Theme.of(context).hintColor),
+          onPressed: () => Navigator.pop(context),
+        ),
         title: Text(
           S.of(context).languages,
           style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),

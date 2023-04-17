@@ -30,8 +30,7 @@ class _NotificationsWidgetState extends StateMVC<NotificationsWidget> {
       key: _con.scaffoldKey,
       appBar: AppBar(
         leading: new IconButton(
-          icon: 
-          
+          icon:
           new Icon(Icons.arrow_back_ios, color: Theme.of(context).hintColor),
           onPressed: () => Navigator.pop(context),
         ),

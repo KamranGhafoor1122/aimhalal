@@ -208,14 +208,14 @@ class _SignUpWidgetState extends StateMVC<SignUpWidget> {
                     ),
                   ),
                   SizedBox(height: 10),
-                  MaterialButton(
+                 /* MaterialButton(
                     elevation: 0,
                     onPressed: () {
                       Navigator.of(context).pushNamed('/Login');
                     },
                     textColor: Theme.of(context).hintColor,
                     child: Text(S.of(context).i_have_account_back_to_login),
-                  ),
+                  ),*/
                 ],
               ),
             ),

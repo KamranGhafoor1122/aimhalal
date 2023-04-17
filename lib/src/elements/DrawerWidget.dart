@@ -77,7 +77,7 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
                       ],
                     ),
                   )
-                : Container(
+                :Container(
                     padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
                     decoration: BoxDecoration(
                       color: Theme.of(context).hintColor.withOpacity(0.1),
@@ -89,7 +89,7 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
                         SizedBox(height: 5),
                         Text(S.of(context).loginAccountOrCreateNewOneForFree, style: Theme.of(context).textTheme.bodyText2),
                         SizedBox(height: 15),
-                        Wrap(
+                       /* Wrap(
                           spacing: 10,
                           children: <Widget>[
                             MaterialButton(
@@ -135,7 +135,7 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
                               shape: StadiumBorder(),
                             ),
                           ],
-                        ),
+                        ),*/
                       ],
                     ),
                   ),
@@ -258,7 +258,7 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
               if (currentUser.value.apiToken != null) {
                 Navigator.of(context).pushNamed('/Settings');
               } else {
-                Navigator.of(context).pushReplacementNamed('/Login');
+                Navigator.of(context).pushNamed('/Login');
               }
             },
             leading: Icon(
