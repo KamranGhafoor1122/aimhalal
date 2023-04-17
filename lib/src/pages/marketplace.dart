@@ -71,7 +71,6 @@ class _MarketPlaceState extends StateMVC<MarketPlace> {
                     //   }),
                     // ),
                     SizedBox(height: 10),
-
                     _con.marketPlaceCategories.isEmpty?CircularProgressIndicator():
                         SizedBox(
                           height: 200,

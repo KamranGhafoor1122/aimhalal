@@ -1,8 +1,10 @@
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart' as Loc;
 import 'package:markets/src/elements/BlockButtonWidget.dart';
 import 'package:markets/src/elements/PermissionDeniedWidget.dart';
@@ -12,6 +14,10 @@ import 'package:markets/src/helpers/maps_util.dart';
 import 'package:markets/src/models/address.dart';
 import 'package:markets/src/repository/user_repository.dart';
 import 'package:http/http.dart' as http;
+import 'dart:io';
+import 'package:path/path.dart';
+import 'package:async/async.dart';
+import 'dart:convert';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 
@@ -33,10 +39,12 @@ class _PostFoodState extends State<PostFood> {
   TextEditingController _numberController = TextEditingController();
   TextEditingController _locationController = TextEditingController();
   TextEditingController _detailsController = TextEditingController();
+  List<File> images = [];
 
   bool loading = false;
   String type;
   bool emptyType= false;
+  final picker = ImagePicker();
 
   @override
   void initState() {
@@ -214,6 +222,59 @@ class _PostFoodState extends State<PostFood> {
                         )*/
 
 
+                        Text("Images", style: Theme.of(context).textTheme.bodyLarge.copyWith(
+                            fontWeight: FontWeight.w600
+                        ),),
+
+                        SizedBox(
+                          height: 8,
+                        ),
+
+                        SizedBox(
+                          height: 80,
+                          child: ListView.builder(
+                              itemCount: images.length+1,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (ctx,index) => index == 0 ? GestureDetector(
+                                onTap: () async{
+                                   PickedFile file = await picker.getImage(source: ImageSource.gallery);
+                                   images.add(File(file.path));
+                                   setState(() {
+                                   });
+                                },
+                                behavior: HitTestBehavior.translucent,
+                                child: Container(
+                                  decoration: BoxDecoration(shape: BoxShape.rectangle,
+                                  borderRadius: BorderRadius.circular(10),
+                                    color: Colors.white30
+                                  ),
+                                  padding: EdgeInsets.all(15),
+                                  child: Column(
+                                    children: [
+                                       Icon(Icons.add,size: 20,color: Theme.of(context).accentColor,),
+                                       SizedBox(height: 5,),
+                                        Text("Add", style: Theme.of(context).textTheme.bodySmall,)
+                                    ],
+                                  ),
+                                ),
+                              ):Container(
+                                height: 65,
+                                width: 65,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.file(images[index-1],fit: BoxFit.cover,),
+                                ),
+                              )),
+                        ),
+
+
+                        SizedBox(
+                          height: 8,
+                        ),
 
                         Text("Title", style: Theme.of(context).textTheme.bodyLarge.copyWith(
                           fontWeight: FontWeight.w600
@@ -445,7 +506,7 @@ class _PostFoodState extends State<PostFood> {
 
 
                               if(formKey.currentState.validate()){
-                                postFoodItem();
+                                postFood(images,context);
                               }
                               else{
                                 setState(() {
@@ -520,7 +581,90 @@ class _PostFoodState extends State<PostFood> {
     return whenDone.future;
   }
 
-  Future<void> postFoodItem() async {
+  Future<String> postFood(List<File> files,BuildContext context) async {
+
+    setState(() {
+      if(type == null){
+        emptyType = true;
+        return;
+      }
+      else{
+        emptyType = false;
+      }
+    });
+
+      setState(() {
+        loading = true;
+      });
+
+
+// string to uri
+    Uri uri = Helper.getUri('api/add_sharefood');
+
+// create multipart request
+    var request = new http.MultipartRequest("POST", uri);
+
+    for (var file in files) {
+      String fileName = file.path.split("/").last;
+      var stream = new http.ByteStream(Stream.castFrom(file.openRead()));
+
+      // get file length
+
+      var length = await file.length(); //imageFile is your image file
+
+      // multipart that takes file
+      var multipartFileSign = new http.MultipartFile('images[]', stream, length, filename: fileName);
+
+      request.files.add(multipartFileSign);
+    }
+
+
+//add headers
+
+//adding params
+    request.fields['user_id'] = currentUser.value.id;
+    request.fields['title'] = _titleController.text.trimRight();
+    request.fields['type'] = type;
+    request.fields['price'] = _priceController.text.trimRight();
+    request.fields['contact_number'] = _numberController.text.trimRight();
+    request.fields['location'] = _locationController.text.trimRight();
+    request.fields['details'] = _detailsController.text.trimRight();
+
+
+// send
+    var response = await request.send();
+
+    print(response.statusCode);
+
+
+
+// listen for response
+    response.stream.transform(utf8.decoder).listen((value) {
+      print("upload res; ${value}");
+    });
+
+    if(response.statusCode == 200){
+      QuickAlert.show(
+          context: context,
+          type: QuickAlertType.success,
+          showCancelBtn: false,
+          title: "Food added successfully",
+          confirmBtnText: "Done",
+          confirmBtnColor: Theme.of(context).accentColor,
+          confirmBtnTextStyle: Theme.of(context).textTheme.bodyMedium,
+          onConfirmBtnTap: (){
+            Navigator.pop(context);
+            Navigator.of(context).pushReplacementNamed('/Pages', arguments: 0);
+          }
+      );
+    }
+
+    setState(() {
+      loading = false;
+    });
+  }
+
+/*  Future<void> postFoodItem() async {
 
     setState(() {
        if(type == null){
@@ -586,6 +730,6 @@ class _PostFoodState extends State<PostFood> {
       print(CustomTrace(StackTrace.current, message: e.toString()).toString());
       return null;
     }
-  }
+  }*/
 
 }

@@ -29,10 +29,11 @@ class Data {
   dynamic userId;
   String title;
   String type;
-  int price;
+  dynamic price;
   String contactNumber;
   String details;
   String location;
+  List<String> images;
   String createdAt;
   String updatedAt;
 
@@ -45,6 +46,7 @@ class Data {
         this.contactNumber,
         this.details,
         this.location,
+        this.images,
         this.createdAt,
         this.updatedAt});
 
@@ -57,6 +59,7 @@ class Data {
     contactNumber = json['contact_number'];
     details = json['details'];
     location = json['location'];
+    images = json['images'].cast<String>();
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -71,6 +74,7 @@ class Data {
     data['contact_number'] = this.contactNumber;
     data['details'] = this.details;
     data['location'] = this.location;
+    data['images'] = this.images;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     return data;

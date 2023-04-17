@@ -39,7 +39,8 @@ class MarketplaceController extends ControllerMVC {
   }
 
   void fetchMarketplaceItems({@required int category_id}) async {
-      Uri uri = Helper.getUri('https://admin.aimhalal.com/public/api/get_halal_items?category=3');
+
+    /* Uri uri = Helper.getUri('https://admin.aimhalal.com/public/api/get_halal_items?category=3');
       try {
         print("uri : ${uri.path}");
         var response = await http.get(uri);
@@ -53,7 +54,7 @@ class MarketplaceController extends ControllerMVC {
       } catch (e) {
         print(CustomTrace(StackTrace.current, message: e.toString()).toString());
         return null;
-      }
+      }*/
   }
 
  refreshEvents() async {

@@ -44,7 +44,7 @@ class ShowFoodsController extends ControllerMVC {
 
   void fetchPaidFoods() async {
     Uri uri = Helper.getUri('api/get_sharefood');
-    try {
+    //try {
       var response = await http.get(uri);
       if(response.statusCode == 200){
         FoodModel foodModel = FoodModel.fromJson(jsonDecode(response.body));
@@ -52,10 +52,10 @@ class ShowFoodsController extends ControllerMVC {
         foodsAll = foods;
         setState(() { });
       }
-    } catch (e) {
+   /* } catch (e) {
       print(CustomTrace(StackTrace.current, message: e.toString()).toString());
       return null;
-    }
+    }*/
 
   }
 

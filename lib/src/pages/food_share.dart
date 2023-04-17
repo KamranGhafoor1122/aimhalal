@@ -31,7 +31,7 @@ class _FoodShareState extends StateMVC<FoodShare> {
 
   ShowFoodsController _con;
 
-  _FoodShareState() : super(ShowFoodsController("paid")) {
+  _FoodShareState() : super(ShowFoodsController("free")) {
     _con = controller;
   }
 
@@ -59,7 +59,7 @@ class _FoodShareState extends StateMVC<FoodShare> {
       ),
       body: RefreshIndicator(
         onRefresh: () async{
-          _con.refreshPaidFoods();
+          _con.refreshFreeFoods();
         },
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(vertical: 10),
@@ -127,10 +127,19 @@ class _FoodShareState extends StateMVC<FoodShare> {
                                   Expanded(
                                     child: Hero(
                                       tag:DateTime.now().millisecondsSinceEpoch.toString(),
-                                      child: Container(
+                                      child: _con.foods[index].images == null || _con.foods[index].images.isEmpty ?Container(
                                         decoration: BoxDecoration(
                                           image: DecorationImage(image: AssetImage("assets/img/image_ph.jpg"), fit: BoxFit.cover),
                                           borderRadius: BorderRadius.circular(5),
+                                        ),
+                                      ):
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(5),
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(10),
+                                          child: Image.network(_con.foods[index].images[0]),
                                         ),
                                       ),
                                     ),
@@ -143,7 +152,7 @@ class _FoodShareState extends StateMVC<FoodShare> {
                                   ),
                                   SizedBox(height: 2),
                                   Text(
-                                    food.type,
+                                    food.type??"free",
                                     style: Theme.of(context).textTheme.caption,
                                     overflow: TextOverflow.ellipsis,
                                   )
