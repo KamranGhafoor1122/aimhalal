@@ -249,7 +249,11 @@ class _MarketWidgetState extends StateMVC<MarketWidget> {
                                         elevation: 0,
                                         padding: EdgeInsets.all(0),
                                         onPressed: () {
-                                          Navigator.of(context).pushNamed('/Pages', arguments: new RouteArgument(id: '1', param: _con.market));
+                                          double lat = double.parse(_con.market.latitude??"0.0");
+                                          double lng = double.parse(_con.market.longitude??"0.0");
+                                          openMap(lat, lng);
+
+                                          // Navigator.of(context).pushNamed('/Pages', arguments: new RouteArgument(id: '1', param: _con.market));
                                         },
                                         child: Icon(
                                           Icons.directions_outlined,
@@ -375,5 +379,14 @@ class _MarketWidgetState extends StateMVC<MarketWidget> {
                   ],
                 ),
         ));
+  }
+
+  Future<void> openMap(double latitude, double longitude) async {
+    String googleUrl = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+    if (await canLaunch(googleUrl)) {
+      await launch(googleUrl);
+    } else {
+      throw 'Could not open the map.';
+    }
   }
 }

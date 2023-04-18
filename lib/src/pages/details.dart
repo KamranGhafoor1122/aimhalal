@@ -89,8 +89,11 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
           }*/
           break;
         case 2:
-          widget.currentPage = MapWidget(parentScaffoldKey: widget.scaffoldKey, routeArgument: RouteArgument(param: _con.market,
-          ),onBack: ()=>_selectTab(0),);
+          double lat = double.parse(_con.market.latitude??"0.0");
+          double lng = double.parse(_con.market.longitude??"0.0");
+          openMap(lat, lng);
+          /*widget.currentPage = MapWidget(parentScaffoldKey: widget.scaffoldKey, routeArgument: RouteArgument(param: _con.market,
+          ),onBack: ()=>_selectTab(0),);*/
           break;
         case 3:
           widget.currentPage = MenuWidget(parentScaffoldKey: widget.scaffoldKey, routeArgument: RouteArgument(param: _con.market),
@@ -118,7 +121,35 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              IconButton(
+
+              MaterialButton(
+                elevation: 0,
+                onPressed: () {
+                  this._selectTab(0);
+                },
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                shape: StadiumBorder(),
+                color: Theme.of(context).accentColor,
+                child: Wrap(
+                  spacing: 10,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.home,
+                      size: widget.currentTab == 0 ? 28 : 24,
+                      color: Theme.of(context).primaryColor ,
+                      //  color: widget.currentTab == 0 ? Theme.of(context).accentColor : Theme.of(context).focusColor,
+                    ),
+
+                    Text(
+                      "Home",
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                    )
+                  ],
+                ),
+              ),
+
+             /* IconButton(
                 icon: Icon(
                   Icons.home,
                   size: widget.currentTab == 0 ? 28 : 24,
@@ -129,7 +160,34 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
                   this._selectTab(0);
                 },
               ),
-              IconButton(
+*/
+              MaterialButton(
+                elevation: 0,
+                onPressed: () {
+                  this._selectTab(1);
+                },
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                shape: StadiumBorder(),
+                color: Theme.of(context).accentColor,
+                child: Wrap(
+                  spacing: 10,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.call_outlined,
+                      size: widget.currentTab == 1 ? 28 : 24,
+                      color: Theme.of(context).primaryColor ,
+                      //  color: widget.currentTab == 1 ? Theme.of(context).accentColor : Theme.of(context).focusColor,
+                    ),
+
+                    Text(
+                      "Call",
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                    )
+                  ],
+                ),
+              ),
+              /*IconButton(
                 icon: Icon(
                   Icons.call_outlined,
                   size: widget.currentTab == 1 ? 28 : 24,
@@ -140,7 +198,35 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
                   this._selectTab(1);
                 },
               ),
-              IconButton(
+*/
+              /*MaterialButton(
+                elevation: 0,
+                onPressed: () {
+                  this._selectTab(3);
+                },
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                shape: StadiumBorder(),
+                color: Theme.of(context).accentColor,
+                child: Wrap(
+                  spacing: 10,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.directions_outlined,
+                      size: widget.currentTab == 2 ? 28 : 24,
+                      color: Theme.of(context).primaryColor ,
+                      // color: widget.currentTab == 2 ? Theme.of(context).accentColor : Theme.of(context).focusColor,
+                    ),
+
+                    Text(
+                      "Directions",
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                    )
+                  ],
+                ),
+              ),*/
+
+            /*  IconButton(
                 icon: Icon(
                   Icons.directions_outlined,
                   size: widget.currentTab == 2 ? 28 : 24,
@@ -150,7 +236,7 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
                 onPressed: () {
                   this._selectTab(2);
                 },
-              ),
+              ),*/
               MaterialButton(
                 elevation: 0,
                 onPressed: () {
@@ -175,5 +261,14 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
           ),
         ),
         body: widget.currentPage ?? CircularLoadingWidget(height: 400));
+  }
+
+  Future<void> openMap(double latitude, double longitude) async {
+    String googleUrl = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+    if (await canLaunch(googleUrl)) {
+      await launch(googleUrl);
+    } else {
+      throw 'Could not open the map.';
+    }
   }
 }
