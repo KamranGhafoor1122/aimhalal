@@ -89,10 +89,15 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
           }*/
           break;
         case 2:
-          widget.currentPage = MapWidget(parentScaffoldKey: widget.scaffoldKey, routeArgument: RouteArgument(param: _con.market));
+          widget.currentPage = MapWidget(parentScaffoldKey: widget.scaffoldKey, routeArgument: RouteArgument(param: _con.market,
+          ),onBack: ()=>_selectTab(0),);
           break;
         case 3:
-          widget.currentPage = MenuWidget(parentScaffoldKey: widget.scaffoldKey, routeArgument: RouteArgument(param: _con.market));
+          widget.currentPage = MenuWidget(parentScaffoldKey: widget.scaffoldKey, routeArgument: RouteArgument(param: _con.market),
+          backPress: (){
+            _selectTab(0);
+          },
+          );
           break;
       }
     });
@@ -115,9 +120,10 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
             children: [
               IconButton(
                 icon: Icon(
-                  Icons.store_outlined,
+                  Icons.home,
                   size: widget.currentTab == 0 ? 28 : 24,
-                  color: widget.currentTab == 0 ? Theme.of(context).accentColor : Theme.of(context).focusColor,
+                  color: Theme.of(context).accentColor ,
+                //  color: widget.currentTab == 0 ? Theme.of(context).accentColor : Theme.of(context).focusColor,
                 ),
                 onPressed: () {
                   this._selectTab(0);
@@ -127,7 +133,8 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
                 icon: Icon(
                   Icons.call_outlined,
                   size: widget.currentTab == 1 ? 28 : 24,
-                  color: widget.currentTab == 1 ? Theme.of(context).accentColor : Theme.of(context).focusColor,
+                  color: Theme.of(context).accentColor ,
+                  //  color: widget.currentTab == 1 ? Theme.of(context).accentColor : Theme.of(context).focusColor,
                 ),
                 onPressed: () {
                   this._selectTab(1);
@@ -137,7 +144,8 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
                 icon: Icon(
                   Icons.directions_outlined,
                   size: widget.currentTab == 2 ? 28 : 24,
-                  color: widget.currentTab == 2 ? Theme.of(context).accentColor : Theme.of(context).focusColor,
+                  color: Theme.of(context).accentColor ,
+                  // color: widget.currentTab == 2 ? Theme.of(context).accentColor : Theme.of(context).focusColor,
                 ),
                 onPressed: () {
                   this._selectTab(2);

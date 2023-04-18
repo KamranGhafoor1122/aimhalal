@@ -73,7 +73,9 @@ class MarketController extends ControllerMVC {
     }, onError: (a) {
       print(a);
     }, onDone: () {
-      market..name = products.elementAt(0).market.name;
+      if(products.isNotEmpty){
+        market.name = products.elementAt(0).market.name;
+      }
     });
   }
 
@@ -102,7 +104,7 @@ class MarketController extends ControllerMVC {
     }, onError: (a) {
       print(a);
     }, onDone: () {
-      categories.insert(0, new Category.fromJSON({'id': '0', 'name': S.of(state.context).all}));
+      categories.insert(0, new Category.fromJSON({'id': '0', 'name': "all"}));
     });
   }
 

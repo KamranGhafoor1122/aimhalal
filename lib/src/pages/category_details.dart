@@ -5,6 +5,7 @@ import 'package:markets/src/helpers/helper.dart';
 import 'package:markets/src/models/market.dart';
 import 'package:markets/src/models/route_argument.dart';
 import 'package:markets/src/models/setting.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../generated/l10n.dart';
 import '../models/home_categories.dart';
@@ -191,7 +192,8 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                                   ),
                                   Text(
                                     Helper.skipHtml(widget.markets[index].description),
-                                    overflow: TextOverflow.fade,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
                                     softWrap: false,
                                     style: Theme.of(context).textTheme.caption.copyWith(
                                       fontSize: 10
@@ -218,6 +220,9 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                                     highlightElevation: 0,
                                     padding: EdgeInsets.all(0),
                                     onPressed: () {
+                                      double lat = double.parse(widget.markets[index].latitude??"0.0");
+                                      double lng = double.parse(widget.markets[index].longitude??"0.0");
+                                      openMap(lat, lng);
                                      // Navigator.of(context).pushNamed('/Pages', arguments: new RouteArgument(id: '1', param: market));
                                     },
                                     child: Icon(Icons.directions_outlined, color: Theme.of(context).primaryColor),
@@ -246,5 +251,15 @@ class _CategoryDetailsState extends State<CategoryDetails> {
         ),
       ),
     );
+  }
+
+
+  Future<void> openMap(double latitude, double longitude) async {
+    String googleUrl = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+    if (await canLaunch(googleUrl)) {
+      await launch(googleUrl);
+    } else {
+      throw 'Could not open the map.';
+    }
   }
 }

@@ -19,8 +19,9 @@ class MenuWidget extends StatefulWidget {
   _MenuWidgetState createState() => _MenuWidgetState();
   final RouteArgument routeArgument;
   final GlobalKey<ScaffoldState> parentScaffoldKey;
+  final Function backPress;
 
-  MenuWidget({Key key, this.parentScaffoldKey, this.routeArgument}) : super(key: key);
+  MenuWidget({Key key, this.parentScaffoldKey, this.routeArgument,this.backPress}) : super(key: key);
 }
 
 class _MenuWidgetState extends StateMVC<MenuWidget> {
@@ -53,7 +54,7 @@ class _MenuWidgetState extends StateMVC<MenuWidget> {
         automaticallyImplyLeading: false,
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back, color: Theme.of(context).hintColor),
-          onPressed: () => Navigator.pop(context),
+          onPressed: widget.backPress,
 
               /*Navigator.of(context).pushNamed('/Details', arguments: RouteArgument(id: '0', param: _con.market.id, heroTag: 'menu_tab')),*/
         ),

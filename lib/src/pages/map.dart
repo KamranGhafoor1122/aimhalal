@@ -12,8 +12,9 @@ import '../models/route_argument.dart';
 class MapWidget extends StatefulWidget {
   final RouteArgument routeArgument;
   final GlobalKey<ScaffoldState> parentScaffoldKey;
+  Function onBack;
 
-  MapWidget({Key key, this.routeArgument, this.parentScaffoldKey}) : super(key: key);
+  MapWidget({Key key, this.routeArgument, this.parentScaffoldKey,this.onBack}) : super(key: key);
 
   @override
   _MapWidgetState createState() => _MapWidgetState();
@@ -57,9 +58,9 @@ class _MapWidgetState extends StateMVC<MapWidget> {
                 icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
                 onPressed: () => widget.parentScaffoldKey.currentState.openDrawer(),
               )
-            : IconButton(
+            : widget.onBack != null ? Container():IconButton(
                 icon: new Icon(Icons.arrow_back, color: Theme.of(context).hintColor),
-                onPressed: () => Navigator.of(context).pushNamed('/Pages', arguments: 1),
+                onPressed:   () => Navigator.of(context).pushNamed('/Pages', arguments: 1),
               ),
         title: Text(
           S.of(context).maps_explorer,

@@ -104,7 +104,7 @@ class _MarketWidgetState extends StateMVC<MarketWidget> {
                                         style: Theme.of(context).textTheme.headline3,
                                       ),
                                     ),
-                                    SizedBox(
+                                    /*SizedBox(
                                       height: 32,
                                       child: Chip(
                                         padding: EdgeInsets.all(0),
@@ -122,7 +122,7 @@ class _MarketWidgetState extends StateMVC<MarketWidget> {
                                         backgroundColor: Theme.of(context).accentColor.withOpacity(0.9),
                                         shape: StadiumBorder(),
                                       ),
-                                    ),
+                                    ),*/
                                   ],
                                 ),
                               ),
