@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:markets/src/controllers/market_controller.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../generated/l10n.dart';
 import '../controllers/product_controller.dart';
 import '../elements/AddToCartAlertDialog.dart';
@@ -236,7 +235,9 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                     ),
                                   ),
                                 _con.product.optionGroups?.isEmpty ?? false
-                                    ? CircularLoadingWidget(height: 100)
+                                    ? Container(
+                                )
+                                  //  ? CircularLoadingWidget(height: 100)
                                     : ListView.separated(
                                         padding: EdgeInsets.all(0),
                                         itemBuilder: (context, optionGroupIndex) {

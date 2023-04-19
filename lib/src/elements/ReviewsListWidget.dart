@@ -13,7 +13,8 @@ class ReviewsListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return reviewsList.isEmpty
-        ? CircularLoadingWidget(height: 200)
+        ? Container()
+       // ? CircularLoadingWidget(height: 200)
         : ListView.separated(
             padding: EdgeInsets.all(0),
             itemBuilder: (context, index) {

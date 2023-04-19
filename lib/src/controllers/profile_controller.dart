@@ -13,7 +13,7 @@ import '../repository/user_repository.dart';
 
 class ProfileController extends ControllerMVC {
   List<Order> recentOrders = [];
-  List<Data> foods = <Data>[];
+  List<Data> foods;
   GlobalKey<ScaffoldState> scaffoldKey;
 
   ProfileController() {

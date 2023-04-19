@@ -119,7 +119,7 @@ class _FoodShareState extends StateMVC<FoodShare> {
                           },
                           behavior: HitTestBehavior.translucent,
                           child: Stack(
-                            alignment: AlignmentDirectional.topEnd,
+                            alignment: AlignmentDirectional.centerStart,
                             children: <Widget>[
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,7 +139,7 @@ class _FoodShareState extends StateMVC<FoodShare> {
                                         ),
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(10),
-                                          child: Image.network(_con.foods[index].images[0]),
+                                          child: Image.network(_con.foods[index].images[0],fit: BoxFit.fill,),
                                         ),
                                       ),
                                     ),

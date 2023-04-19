@@ -142,9 +142,11 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
                           },
                         ),*/
 
-                  _con.foods.isEmpty
+                  _con.foods == null
                       ? CircularLoadingWidget(height: 500)
-                      : GridView.builder(
+                      :
+                  _con.foods.isNotEmpty?
+                  GridView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           primary: false,
@@ -307,7 +309,12 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
                           ),
                         );*/
                           }
-                      )
+                      ):SizedBox(
+                    height: 500,
+                    child: Center(
+                      child: Text("No data found",style: Theme.of(context).textTheme.bodyMedium,),
+                    ),
+                  )
                 ],
               ),
             ),
