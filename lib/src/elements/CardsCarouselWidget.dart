@@ -107,9 +107,9 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
                             else if(widget.homeCategories[index].name.contains("Events")){
                               Navigator.push(context, MaterialPageRoute(builder: (ctx)=>EventsWidget()));
                             }
-                            else if(widget.homeCategories[index].id == 8){
+                           /* else if(widget.homeCategories[index].id == 8){
                               Navigator.push(context, MaterialPageRoute(builder: (ctx)=>MarketPlace(widget.homeCategories[index].name)));
-                            }
+                            }*/
                             else if(widget.homeCategories[index].id == 11){
                               Navigator.push(context, MaterialPageRoute(builder: (ctx)=>DirectoryWidget(widget.homeCategories[index].name)));
                             }
@@ -122,6 +122,7 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
                             else{
                               Navigator.push(context, MaterialPageRoute(builder: (ctx)=>CategoryDetails(markets: widget.homeCategories[index].markets,
                                 name: widget.homeCategories[index].name,
+                                id: widget.homeCategories[index].id,
                               )));
                             }
                           },

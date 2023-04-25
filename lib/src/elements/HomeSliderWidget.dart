@@ -356,6 +356,7 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
                                                     .categories[index].markets,
                                                 name: widget
                                                     .categories[index].name,
+                                            id: widget.categories[index].id,
                                               )));
                                 }
                               },

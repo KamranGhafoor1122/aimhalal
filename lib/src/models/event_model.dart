@@ -27,6 +27,7 @@ class EventModel {
 class Data {
   int id;
   String name;
+  String description;
   String date;
   String location;
   String createdAt;
@@ -37,6 +38,7 @@ class Data {
       {this.id,
         this.name,
         this.date,
+        this.description,
         this.location,
         this.createdAt,
         this.updatedAt,
@@ -45,6 +47,7 @@ class Data {
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
+    description = json['description'];
     date = json['date'];
     location = json['location'];
     createdAt = json['created_at'];
@@ -56,6 +59,7 @@ class Data {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
+    data['description'] = this.description;
     data['date'] = this.date;
     data['location'] = this.location;
     data['created_at'] = this.createdAt;

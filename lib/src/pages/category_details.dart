@@ -16,15 +16,20 @@ ValueNotifier<Setting> setting = new ValueNotifier(new Setting());
 class CategoryDetails extends StatefulWidget {
   List<Market> markets;
   String name;
-  CategoryDetails({Key key,this.markets,this.name}) : super(key: key);
+  int id;
+  CategoryDetails({Key key,this.markets,this.name,this.id}) : super(key: key);
 
   @override
   State<CategoryDetails> createState() => _CategoryDetailsState();
 }
 
 class _CategoryDetailsState extends State<CategoryDetails> {
+
+
   @override
   Widget build(BuildContext context) {
+    print("idddd : ${widget.id}");
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -77,7 +82,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                       arguments: RouteArgument(
                         id: '0',
                         param: widget.markets[index].id,
-                        heroTag: "hero tag",
+                        heroTag: widget.id.toString(),
                       ));
                 },
                 behavior: HitTestBehavior.translucent,

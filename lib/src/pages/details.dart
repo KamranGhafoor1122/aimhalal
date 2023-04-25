@@ -237,6 +237,7 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
                   this._selectTab(2);
                 },
               ),*/
+              widget.routeArgument.heroTag == "10" || widget.routeArgument.heroTag == "12" ?
               MaterialButton(
                 elevation: 0,
                 onPressed: () {
@@ -256,7 +257,7 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
                     )
                   ],
                 ),
-              ),
+              ):Container(),
             ],
           ),
         ),

@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_html/flutter_html.dart';
 import '../models/event_model.dart';
 
 class EventsDetails extends StatefulWidget {
@@ -86,6 +86,12 @@ class _EventsDetailsState extends State<EventsDetails> {
                     height: 8,
                   ),
 
+
+
+                  SizedBox(
+                    height: 8,
+                  ),
+
                   Text(
                     "Location: ${widget.event.location}",
                     style: Theme.of(context).textTheme.bodyLarge.copyWith(
@@ -105,6 +111,35 @@ class _EventsDetailsState extends State<EventsDetails> {
                         fontWeight: FontWeight.w600
                     ),
                   ),
+
+                  SizedBox(
+                    height: 8,
+                  ),
+
+                  Row(
+                    children: [
+                      Text(
+                        "Description: ",
+                        style: Theme.of(context).textTheme.bodyLarge.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600
+                        ),
+                      ),
+
+                    ],
+                  ),
+
+                  widget.event.description == null ? Text(
+                    "None",
+                    style: Theme.of(context).textTheme.bodyLarge.copyWith(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600
+                    ),
+                  ):
+                  Html(
+                    data: widget.event.description,
+                  ),
+
                 ],
               ),
             )
