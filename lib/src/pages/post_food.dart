@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:location/location.dart' as Loc;
 import 'package:markets/src/elements/BlockButtonWidget.dart';
 import 'package:markets/src/elements/PermissionDeniedWidget.dart';
@@ -38,12 +39,18 @@ class _PostFoodState extends State<PostFood> {
   TextEditingController _priceController = TextEditingController();
   TextEditingController _numberController = TextEditingController();
   TextEditingController _locationController = TextEditingController();
+  TextEditingController _packingController = TextEditingController();
+  TextEditingController _servingForController = TextEditingController();
+  TextEditingController _validDateController = TextEditingController();
   TextEditingController _detailsController = TextEditingController();
   List<File> images = [];
 
   bool loading = false;
   String type;
   bool emptyType= false;
+  DateTime initialDate;
+  TimeOfDay selectedTime;
+
   final picker = ImagePicker();
 
   @override
@@ -459,6 +466,98 @@ class _PostFoodState extends State<PostFood> {
                           height: 28,
                         ),
 
+
+                        Text("Packing", style: Theme.of(context).textTheme.bodyLarge.copyWith(
+                            fontWeight: FontWeight.w600
+                        ),),
+
+                        SizedBox(
+                          height: 8,
+                        ),
+
+                        TextFormField(
+                          autofocus: false,
+                          keyboardType: TextInputType.text,
+                          controller: _packingController,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(12),
+                            hintText: "Packing",
+                            hintStyle: Theme.of(context).textTheme.caption.merge(TextStyle(fontSize: 14)),
+                            border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.3))),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                          ),
+                        ),
+
+
+                        SizedBox(
+                          height: 28,
+                        ),
+
+
+
+
+                        Text("Valid till date", style: Theme.of(context).textTheme.bodyLarge.copyWith(
+                            fontWeight: FontWeight.w600
+                        ),),
+
+                        SizedBox(
+                          height: 8,
+                        ),
+
+                        InkWell(
+                          onTap: (){
+                            _selectDate(context);
+                          },
+                          child: TextFormField(
+                            autofocus: false,
+                            keyboardType: TextInputType.number,
+                            enabled: false,
+                            controller: _validDateController,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(12),
+                              hintText: "Valid date",
+                              hintStyle: Theme.of(context).textTheme.caption.merge(TextStyle(fontSize: 14)),
+                              border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.3))),
+                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                            ),
+                          ),
+                        ),
+
+
+                        SizedBox(
+                          height: 28,
+                        ),
+
+
+                        Text("Serving For", style: Theme.of(context).textTheme.bodyLarge.copyWith(
+                            fontWeight: FontWeight.w600
+                        ),),
+
+                        SizedBox(
+                          height: 8,
+                        ),
+
+                        TextFormField(
+                          autofocus: false,
+                          keyboardType: TextInputType.number,
+                          controller: _servingForController,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(12),
+                            hintText: "Serving for people",
+                            hintStyle: Theme.of(context).textTheme.caption.merge(TextStyle(fontSize: 14)),
+                            border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.3))),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
+                          ),
+                        ),
+
+
+                        SizedBox(
+                          height: 28,
+                        ),
+
                         Text("Details", style: Theme.of(context).textTheme.bodyLarge.copyWith(
                             fontWeight: FontWeight.w600
                         ),),
@@ -550,6 +649,50 @@ class _PostFoodState extends State<PostFood> {
   }
 
 
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: initialDate??DateTime.now(),
+      firstDate:DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day),
+      lastDate: DateTime(DateTime.now().year+100,DateTime.now().month,DateTime.now().day),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: Theme.of(context).brightness == Brightness.light ? ThemeData.light():ThemeData.dark(),
+          child: child,
+        );
+      },
+    );
+    if (picked != null) {
+      setState(() {
+        initialDate=picked;
+        _validDateController.text= DateFormat("dd-MMM-yyyy").format(picked);
+        _selectTime(context);
+      });
+    }
+  }
+
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay picked_s = await showTimePicker(
+        context: context,
+        initialTime: selectedTime??TimeOfDay.now(), builder: (BuildContext context, Widget child) {
+
+      return Theme(
+        data: Theme.of(context).brightness == Brightness.light ? ThemeData.light():ThemeData.dark(),
+        child: MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+          child: child,
+        ),
+      );});
+
+    if (picked_s != null && picked_s != selectedTime )
+      setState(() {
+        selectedTime = picked_s;
+        DateTime combined = DateTime(initialDate.year,initialDate.month,initialDate.day,selectedTime.hour,
+          selectedTime.minute,);
+        _validDateController.text= "${DateFormat("dd - MMM - yyyy / hh:mm a").format(DateTime.fromMicrosecondsSinceEpoch(combined.millisecondsSinceEpoch * 1000))}";
+      });
+  }
+
 
   Future<dynamic> showCurrentLocation() async {
     Loc.Location location =  Loc.Location();
@@ -629,6 +772,9 @@ class _PostFoodState extends State<PostFood> {
     request.fields['contact_number'] = _numberController.text.trimRight();
     request.fields['location'] = _locationController.text.trimRight();
     request.fields['details'] = _detailsController.text.trimRight();
+    request.fields['packing'] = _packingController.text.trimRight();
+    request.fields['serving_for'] = _servingForController.text.trimRight();
+    request.fields['valid_till_date_time'] = _validDateController.text.trimRight();
 
 
 // send

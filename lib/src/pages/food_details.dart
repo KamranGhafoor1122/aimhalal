@@ -181,6 +181,78 @@ class _FoodDetailsState extends State<FoodDetails> {
                       height: 10,
                     ),
 
+
+
+                    Row(
+                      children: [
+                        Text(
+                          "Packing :",
+                          style: Theme.of(context).textTheme.bodyText1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(
+                          width: 7,
+                        ),
+                        Text(
+                          widget.food.packing??"",
+                          style: Theme.of(context).textTheme.bodyText1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    Row(
+                      children: [
+                        Text(
+                          "Serving for :",
+                          style: Theme.of(context).textTheme.bodyText1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(
+                          width: 7,
+                        ),
+                        Text(
+                          widget.food.servingFor??"",
+                          style: Theme.of(context).textTheme.bodyText1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+
+
+
+
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    Row(
+                      children: [
+                        Text(
+                          "Valid till Date :",
+                          style: Theme.of(context).textTheme.bodyText1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(
+                          width: 7,
+                        ),
+                        Text(
+                          widget.food.validDate??"",
+                          style: Theme.of(context).textTheme.bodyText1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(
+                      height: 10,
+                    ),
+
+
                     Row(
                       children: [
                         Text(

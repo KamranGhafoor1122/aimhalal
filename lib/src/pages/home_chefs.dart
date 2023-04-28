@@ -119,7 +119,7 @@ class _HomeChefsState extends StateMVC<HomeChefs> {
                           },
                           behavior: HitTestBehavior.translucent,
                           child: Stack(
-                            alignment: AlignmentDirectional.topEnd,
+                            alignment: AlignmentDirectional.centerStart,
                             children: <Widget>[
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

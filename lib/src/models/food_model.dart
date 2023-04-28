@@ -33,6 +33,9 @@ class Data {
   String contactNumber;
   String details;
   String location;
+  String packing;
+  String servingFor;
+  String validDate;
   List<String> images;
   String createdAt;
   String updatedAt;
@@ -46,6 +49,9 @@ class Data {
         this.contactNumber,
         this.details,
         this.location,
+        this.packing,
+        this.servingFor,
+        this.validDate,
         this.images,
         this.createdAt,
         this.updatedAt});
@@ -59,6 +65,9 @@ class Data {
     contactNumber = json['contact_number'];
     details = json['details'];
     location = json['location'];
+    packing = json['packing'];
+    servingFor = json['serving_for'];
+    validDate = json['valid_till_date_time'];
     images = json['images'].cast<String>();
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
